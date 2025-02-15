@@ -28,11 +28,13 @@ function Navbar() {
   return (
     <nav>
       <div id="title">
-        <h1>
-          <span>Michael</span>
-          <FontAwesomeIcon icon={faCrown} />
-          <span>Jackson</span>
-        </h1>
+      <Link to="/" className="logo">
+          <h1>
+            <span>Michael</span>
+            <FontAwesomeIcon icon={faCrown} />
+            <span>Jackson</span>
+          </h1>
+        </Link>
 
         <div className="points">
           Tokens: <b>{points}</b>

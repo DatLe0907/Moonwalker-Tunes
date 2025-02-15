@@ -16,9 +16,9 @@
     text-align: center;
   }
 
-  .Info .Info-box > .img {
+  .Info .Info-box  .img {
     /* width: 100%; */
-    width: 80vw;
+    width: 60vw;
     height: 300px;
   }
 

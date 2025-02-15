@@ -1,131 +1,142 @@
 import { useState, useRef, useEffect } from "react";
 import "./MusicPlayer.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 
-export default function MusicPlayer({ song, isPlaying, onPlay }) {
+export default function MusicPlayer({ song, isPlaying, onPlay, onEnd }) {
   const playerRef = useRef(null);
-  const intervalRef = useRef(null);
   const [player, setPlayer] = useState(null);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [videoDuration, setVideoDuration] = useState(240); // Mặc định
+  const [videoDuration, setVideoDuration] = useState(240);
+  const [isReplay, setIsReplay] = useState(false);
 
-  const getYouTubeId = (url) => {
-    const match = url.match(/embed\/([a-zA-Z0-9_-]+)/);
-    return match ? match[1] : null;
-  };
+  const getYouTubeId = (url) => url.match(/embed\/([a-zA-Z0-9_-]+)/)?.[1] || null;
 
   useEffect(() => {
     if (!isPlaying) return;
 
-    // Nếu YouTube API chưa có, tải nó
     if (!window.YT) {
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.body.appendChild(tag);
-      tag.onload = () => {
+      const script = document.createElement("script");
+      script.src = "https://www.youtube.com/iframe_api";
+      script.onload = () => {
         if (window.YT) loadVideo();
       };
+      document.body.appendChild(script);
     } else {
       loadVideo();
     }
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [isPlaying]);
+  }, [isPlaying, isReplay]);
 
   const loadVideo = () => {
     const videoId = getYouTubeId(song.src);
-    if (!videoId || !playerRef.current) return; // 🔥 Kiểm tra playerRef trước khi dùng
+    if (!videoId || !playerRef.current) return;
+
+    if (player) {
+      player.destroy();
+    }
 
     const newPlayer = new window.YT.Player(playerRef.current, {
-      videoId: videoId,
+      videoId,
       playerVars: {
         autoplay: 1,
-        controls: 0, // Ẩn thanh tua mặc định của YouTube
+        controls: 0,
         modestbranding: 1,
         rel: 0,
         showinfo: 0,
-        disablekb: 1, // Chặn tua bằng bàn phím
+        disablekb: 1,
+        loop: isReplay ? 1 : 0,
+        playlist: isReplay ? videoId : undefined,
       },
       events: {
         onReady: (event) => {
           setPlayer(event.target);
-          setVideoDuration(event.target.getDuration());
+          const duration = event.target.getDuration();
+          setVideoDuration(duration > 0 ? duration : 240);
+          event.target.playVideo();
         },
         onStateChange: (event) => {
-          if (event.data === 1) {
-            intervalRef.current = setInterval(() => {
-              setCurrentTime(event.target.getCurrentTime());
-              setProgress((event.target.getCurrentTime() / event.target.getDuration()) * 100);
-            }, 1000);
-          } else {
-            clearInterval(intervalRef.current);
+          if (event.data === window.YT.PlayerState.ENDED && isReplay) {
+            event.target.seekTo(0);
+            event.target.playVideo();
+          } else if (event.data === window.YT.PlayerState.ENDED) {
+            onEnd();
           }
         },
       },
     });
-
-    setPlayer(newPlayer);
   };
 
-  const handleSeek = (e) => {
-    const newTime = parseFloat(e.target.value);
-    setCurrentTime(newTime);
-    setProgress((newTime / videoDuration) * 100);
+  useEffect(() => {
+    if (!player) return;
+    const interval = setInterval(() => {
+      if (player.getCurrentTime) {
+        const time = player.getCurrentTime();
+        setCurrentTime(time);
+        setProgress((time / videoDuration) * 100);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [player, videoDuration]);
+
+  useEffect(() => () => player?.destroy(), [player]);
+
+  const handlePlay = () => {
+    player ? player.playVideo() : loadVideo();
+    onPlay();
   };
 
   const handleSeekEnd = () => {
-    if (player) {
-      player.seekTo(currentTime, true);
-    }
+    player?.seekTo(currentTime, true);
   };
 
   const handleClickOnProgress = (e) => {
-    if (!player) return; // Đảm bảo player đã sẵn sàng
-  
-    const progressBar = e.currentTarget;
-    const rect = progressBar.getBoundingClientRect();
-    const clickPosition = e.clientX - rect.left; // Lấy vị trí click
-    const newTime = (clickPosition / rect.width) * videoDuration; // Tính thời gian mới
-  
+    if (!player) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const newTime = ((e.clientX - rect.left) / rect.width) * videoDuration;
     setCurrentTime(newTime);
     setProgress((newTime / videoDuration) * 100);
-    
-    player.seekTo(newTime, true); // 🔥 Gọi API YouTube để tua video
+    player.seekTo(newTime, true);
   };
-  
 
   return (
     <div className="music-card">
       {isPlaying ? (
         <>
-          <div className="music-video-wrapper">
+          <div className="music-player">
             <div ref={playerRef} className="music-video"></div>
           </div>
-
-          <div className="progress-container" onClick={handleClickOnProgress}>
-          <input
-            type="range"
-            min="0"
-            max={videoDuration}
-            value={currentTime}
-            onChange={handleSeek}
-            onMouseUp={handleSeekEnd}
-            className="progress-slider"
-            style={{ "--progress": `${progress}%` }}
-          />
-        </div>
-
-
+          <div className="controls">
+            <div className="progress-container" onClick={handleClickOnProgress}>
+              <input
+                type="range"
+                min="0"
+                max={videoDuration}
+                value={currentTime}
+                onChange={(e) => setCurrentTime(parseFloat(e.target.value))}
+                onMouseUp={handleSeekEnd}
+                className="progress-slider"
+                style={{ "--progress": `${progress}%` }}
+              />
+            </div>
+            <button
+              className={`replay-button ${isReplay ? "active" : ""}`}
+              onClick={() => setIsReplay(!isReplay)}
+            >
+              <FontAwesomeIcon icon={faRepeat} />
+            </button>
+          </div>
         </>
       ) : (
-        <div className="thumbnail" onClick={onPlay}>
-          <img src={`https://img.youtube.com/vi/${getYouTubeId(song.src)}/hqdefault.jpg`} alt={song.title} className="thumbnail-image" />
+        <div className="thumbnail" onClick={handlePlay}>
+          <img
+            src={`https://img.youtube.com/vi/${getYouTubeId(song.src)}/hqdefault.jpg`}
+            alt={song.title}
+            className="thumbnail-image"
+          />
           <button className="play-button">▶</button>
         </div>
       )}
-
       <div className="song-info">
         <h3 className="song-title">{song.title}</h3>
         <p className="song-album">Album: {song.album}</p>

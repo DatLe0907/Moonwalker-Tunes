@@ -15,6 +15,11 @@ nav {
   color: #fff;
 }
 
+nav a {
+  color: #fff;  
+  text-decoration: none;
+}
+
 #title {
   display: flex;
   align-items: center;
@@ -81,7 +86,6 @@ nav {
   width: 100%;
   padding: 0 25px;
   color: #fff;
-  text-decoration: none;
   display: flex;
   align-items: center;
   height: 100%;

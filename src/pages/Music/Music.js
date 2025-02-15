@@ -7,20 +7,20 @@ import MusicPlayer from "./MusicPlayer";
 import "./Music.css"
 
 const songs = [
-  { title: "Thriller", author: "Michael Jackson", album: "Thriller", src: "https://www.youtube.com/embed/0JFbiCg-8n4?si=ICb4dAVdczaiP9dE?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Billie Jean", author: "Michael Jackson", album: "Thriller", src: "https://www.youtube.com/embed/Zi_XLOBDo_Y?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Beat It", author: "Michael Jackson", album: "Thriller", src: "https://www.youtube.com/embed/oRdxUFDoQe0?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Thriller", author: "Michael Jackson", album: "Thriller, HIStory", src: "https://www.youtube.com/embed/0JFbiCg-8n4?si=ICb4dAVdczaiP9dE?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Billie Jean", author: "Michael Jackson", album: "Thriller, HIStory", src: "https://www.youtube.com/embed/Zi_XLOBDo_Y?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Beat It", author: "Michael Jackson", album: "Thriller, HIStory", src: "https://www.youtube.com/embed/oRdxUFDoQe0?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Smooth Criminal", author: "Michael Jackson", album: "Bad", src: "https://www.youtube.com/embed/sFvENQBc-F8?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Black or White", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/F2AitTPI5U0?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Man in the Mirror", author: "Michael Jackson", album: "Bad", src: "https://www.youtube.com/embed/PivWY9wn5ps?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Black or White", author: "Michael Jackson", album: "Dangerous, HIStory", src: "https://www.youtube.com/embed/F2AitTPI5U0?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Man in the Mirror", author: "Michael Jackson", album: "Bad, HIStory", src: "https://www.youtube.com/embed/PivWY9wn5ps?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Earth Song", author: "Michael Jackson", album: "HIStory", src: "https://www.youtube.com/embed/XAi3VTSdTxU?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Heal the World", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/BWf-eARnf6U?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Heal the World", author: "Michael Jackson", album: "Dangerous, HIStory", src: "https://www.youtube.com/embed/BWf-eARnf6U?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "You Are Not Alone", author: "Michael Jackson", album: "HIStory", src: "https://www.youtube.com/embed/pAyKJAtDNCw?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Bad", author: "Michael Jackson", album: "Bad", src: "https://www.youtube.com/embed/dsUXAEzaC3Q?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Rock with You", author: "Michael Jackson", album: "Off the Wall", src: "https://www.youtube.com/embed/5X-Mrc2l1d0?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Don't Stop 'Til You Get Enough", author: "Michael Jackson", album: "Off the Wall", src: "https://www.youtube.com/embed/yURRmWtbTbo?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Remember the Time", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/LeiFF0gvqcc?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "The Way You Make Me Feel", author: "Michael Jackson", album: "Bad", src: "https://www.youtube.com/embed/HzZ_urpj4As?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Bad", author: "Michael Jackson", album: "Bad, HIStory", src: "https://www.youtube.com/embed/dsUXAEzaC3Q?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Rock with You", author: "Michael Jackson", album: "Off the Wall, HIStory", src: "https://www.youtube.com/embed/5X-Mrc2l1d0?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Don't Stop 'Til You Get Enough", author: "Michael Jackson", album: "Off the Wall, HIStory", src: "https://www.youtube.com/embed/yURRmWtbTbo?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Remember the Time", author: "Michael Jackson", album: "Dangerous, HIStory", src: "https://www.youtube.com/embed/LeiFF0gvqcc?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "The Way You Make Me Feel", author: "Michael Jackson", album: "Bad, HIStory", src: "https://www.youtube.com/embed/HzZ_urpj4As?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "They Don't Care About Us", author: "Michael Jackson", album: "HIStory", src: "https://www.youtube.com/embed/QNJL6nfu__Q?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Blood on the Dance Floor", author: "Michael Jackson", album: "Blood on the Dance Floor", src: "https://www.youtube.com/embed/c3_NntYhzV4?si=6_Wef2t-PQ06Sh39?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Ghosts", author: "Michael Jackson", album: "Blood on the Dance Floor", src: "https://www.youtube.com/embed/Xh9Cp4rd7mI?si=bo1ddN5SBZFxQw3S?rel=0&controls=0&modestbranding=1&showinfo=0" },
@@ -43,6 +43,7 @@ const songs = [
   { title: "Why You Wanna Trip on Me", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/C2FUzoy-UCg?si=f1JKKFzUWTPYpOkB?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Gone Too Soon", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/IcNamirwTaY?si=zM0ln_G904M7WuhW?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "She Drives Me Wild", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/kRp_FqCmsVA?si=mhb5xPvEsuLGY5Mg?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "She's Out of My Life", author: "Michael Jackson", album: "Off the Wall, HIStory", src: "https://www.youtube.com/embed/6DQJPL9Yuq0?si=bapWHdfNp9ZoW11H?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Keep the Faith", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/vIEiP7kzGjI?si=t4UWO07AdvLK68kZ?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Someone Put Your Hand Out", author: "Michael Jackson", album: "Unreleased", src: "https://www.youtube.com/embed/jADX57wacsA?si=DXIpno-7rUtonSr6?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "For All Time", author: "Michael Jackson", album: "Unreleased", src: "https://www.youtube.com/embed/54703WkoChI?si=ZN5VTsEArzMiilS-?rel=0&controls=0&modestbranding=1&showinfo=0" },
@@ -53,6 +54,7 @@ const songs = [
   { title: "You Can't Win", author: "Michael Jackson", album: "The Wiz Soundtrack", src: "https://www.youtube.com/embed/Q9RtLGrdm68?si=lUJoLbnEvH50WSkB?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Ease on Down the Road", author: "Michael Jackson & Diana Ross", album: "The Wiz Soundtrack", src: "https://www.youtube.com/embed/uNKmKOjGUbw?si=G0r5gBK6aX5twDa1?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Carousel", author: "Michael Jackson", album: "Thriller", src: "https://www.youtube.com/embed/Hqsslwcb3Qg?si=s3XFWoaN39d3MwQ1?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Wanna Be Startin' Somethin'", author: "Michael Jackson", album: "Thriller, HIStory", src: "https://www.youtube.com/embed/DsJlttdkybk?si=y6RZty_7cGSAdFKu?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Girlfriend", author: "Michael Jackson", album: "Off the Wall", src: "https://www.youtube.com/embed/O8rc8FNCHcU?si=guFpcqibgYr7SgQC?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Get on the Floor", author: "Michael Jackson", album: "Off the Wall", src: "https://www.youtube.com/embed/UdYwglFL6iM?si=pMD3oFTZXrzYAOsT?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "I Can't Help It", author: "Michael Jackson", album: "Off the Wall", src: "https://www.youtube.com/embed/re3MOe1SBOs?si=0iOS8pvgb2VSDlhv?rel=0&controls=0&modestbranding=1&showinfo=0" },
@@ -61,12 +63,15 @@ const songs = [
   { title: "She's Out of My Life", author: "Michael Jackson", album: "Off the Wall", src: "https://www.youtube.com/embed/6DQJPL9Yuq0?si=WWFaNh11kFpVfyAB?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "The Lady in My Life", author: "Michael Jackson", album: "Thriller", src: "https://www.youtube.com/embed/cJLH5yXoqi8?si=Buqf6d1ueqP4Jc_m?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Baby Be Mine", author: "Michael Jackson", album: "Thriller", src: "https://www.youtube.com/embed/O3tnOVideSo?si=7YLIstA-gjpBrIMd?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "P.Y.T. (Pretty Young Thing)", author: "Michael Jackson", album: "Thriller", src: "https://www.youtube.com/embed/1ZZQuj6htF4?si=sXvCrG5mgTjz6NYU?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "The Girl Is Mine", author: "Michael Jackson", album: "Thriller, HIStory", src: "https://www.youtube.com/embed/O3tnOVideSo?si=7YLIstA-gjpBrIMd?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Human Nature", author: "Michael Jackson", album: "Thriller", src: "https://www.youtube.com/embed/ElN_4vUvTPs?si=ims4FRIibeOwukh_?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "P.Y.T. (Pretty Young Thing)", author: "Michael Jackson", album: "Thriller", src: "https://www.youtube.com/embed/8GB9BULxZ8c?si=Ie_h5ylXvgaElwlu?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Speed Demon", author: "Michael Jackson", album: "Bad", src: "https://www.youtube.com/embed/l039y9FaIjc?si=x5fAQF-Oyecta9G7?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Liberian Girl", author: "Michael Jackson", album: "Bad", src: "https://www.youtube.com/embed/f3V-7DEAgdc?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Just Good Friends", author: "Michael Jackson", album: "Bad", src: "https://www.youtube.com/embed/kt27N-_3Hjs?si=bYt0HXfQNezu2AlD?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "I Just Can't Stop Loving You", author: "Michael Jackson", album: "Bad", src: "https://www.youtube.com/embed/GAmVuYEeSSg?si=WaBHqTaxxFc11ui7?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "I Just Can't Stop Loving You", author: "Michael Jackson", album: "Bad, HIStory", src: "https://www.youtube.com/embed/GAmVuYEeSSg?si=WaBHqTaxxFc11ui7?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "This Time Around", author: "Michael Jackson", album: "HIStory", src: "hhttps://www.youtube.com/embed/uXFSjcjK73M?si=O36kz4VvZUluQXzT?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "History", author: "Michael Jackson", album: "HIStory", src: "https://www.youtube.com/embed/_ksnxNfrKrw?si=K3PsCvthoXdYRxGA?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Money", author: "Michael Jackson", album: "HIStory", src: "https://www.youtube.com/embed/I3XRCfet0Lc?si=ifmC3TzWxTI2868X?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "D.S.", author: "Michael Jackson", album: "HIStory", src: "https://www.youtube.com/embed/SHWpLfZzGU0?si=_p-8u48qWh0GvEt_?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Tabloid Junkie", author: "Michael Jackson", album: "HIStory", src: "https://www.youtube.com/embed/loCFx_eelXE?si=wazK1WXnRdmyBRCY?rel=0&controls=0&modestbranding=1&showinfo=0" },
@@ -79,10 +84,27 @@ const songs = [
   { title: "Don't Walk Away", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/8OVAbsEhKQw?si=Zurd8MVZKM9YrWcV?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "The Lost Children", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/1UoPNNzWUjk?si=Y-4rDlHAPrsSXY5A?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Heaven Can Wait", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/TDVlDUAIz5k?si=SmKTs4gjnfRP6ikP?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Shout", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/yURRmWtbTbo?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "We've Got a Good Thing Going", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/yURRmWtbTbo?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Ben", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/yURRmWtbTbo?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Music and Me", author: "Michael Jackson", album: "Music & Me", src: "https://www.youtube.com/embed/yURRmWtbTbo?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Shout", author: "Michael Jackson", album: "Unreleased", src: "https://www.youtube.com/embed/O4o7rpbeTtY?si=3yXeTu-lREihDUSQ?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "We've Got a Good Thing Going", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/OTAfjaOWnH4?si=mV9fwXXM1nr3mCPr?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Ben", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/i7TTSzfs2kw?si=xvGqJ3ammHmLGEnE?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "The Greatest Show on Earth", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/p3oP7pJQEew?si=ekeZzfX_kX7oN68h?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "People Make the World Go Round", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/U4Ih_M_laCs?si=2eOEFcz0tTwkk_F-?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Everybody's Somebody's Fool", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/NhF60vvQiU8?si=W1M76QtW6J4C_u7e?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "My Girl", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/C3sjkfVNgPc?si=PqFUrm2Sq9TPozg6?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "What Goes Around Comes Around", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/ZU_xhdij6mA?si=Qb5rmB4hn03SWodf?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "In Our Small Way", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/ES0fQzoK5O0?si=IYmOX4TqPllVPd9Y?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Shoo-Be-Doo-Be-Doo-Da-Day", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/_I3H3BDKRUw?si=3vpsnbHo70in5bkW?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "You Can Cry on My Shoulder", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/RIaxbd2_jiA?si=4QHtslEQbuQxJ6vp?rel=0&controls=0&modestbranding=1&showinfo=0" }, 
+  { title: "Music and Me", author: "Michael Jackson", album: "Music & Me", src: "https://www.youtube.com/embed/IO9xvk8Bojo?si=Mk3GHj7SY1dP8UXS?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "With A Child's Heart", author: "Michael Jackson", album: "Music & Me", src: "https://www.youtube.com/embed/ZyPER1Rd39w?si=f0DijifEfna1gYti?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Up Again", author: "Michael Jackson", album: "Music & Me", src: "https://www.youtube.com/embed/414dWsr0qg8?si=flk4PHId4Io_V2tz?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "All The Things You Are", author: "Michael Jackson", album: "Music & Me", src: "https://www.youtube.com/embed/qdZ58AUs4Fc?si=rNfs2IDobmeRHtuJ?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Happy", author: "Michael Jackson", album: "Music & Me", src: "https://www.youtube.com/embed/gqag3AcEIuo?si=Gbw-d24DnDlN_idx?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Too Young", author: "Michael Jackson", album: "Music & Me", src: "https://www.youtube.com/embed/DqOJ3Cyxh8g?si=BF6xS1dHfQ8BYB79?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Doggin' Around", author: "Michael Jackson", album: "Music & Me", src: "https://www.youtube.com/embed/OH7qIr7yl-8?si=mBtUoaZNSh7qfs7e?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Johnny Raven", author: "Michael Jackson", album: "Music & Me", src: "https://www.youtube.com/embed/4ieeG87E7ug?si=j0Md3eDm0pCm_hon?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Euphoria", author: "Michael Jackson", album: "Music & Me", src: "https://www.youtube.com/embed/WNNbk5q1R0o?si=a6IOpnGT1aLkkEyc?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Morning Glow", author: "Michael Jackson", album: "Music & Me", src: "https://www.youtube.com/embed/JEHxTK4XgK4?si=aLshdYbkPY8q2LXs?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Farewell My Summer Love", author: "Michael Jackson", album: "Farewell My Summer Love", src: "https://www.youtube.com/embed/yURRmWtbTbo?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "One Day in Your Life", author: "Michael Jackson", album: "Forever, Michael", src: "https://www.youtube.com/embed/yURRmWtbTbo?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Cinderella Stay Awhile", author: "Michael Jackson", album: "Forever, Michael", src: "https://www.youtube.com/embed/yURRmWtbTbo?rel=0&controls=0&modestbranding=1&showinfo=0" },
@@ -127,6 +149,7 @@ const songs = [
 
 const songsPerPage = 8;
 
+
 function Music() {
   const [currentPlaying, setCurrentPlaying] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -135,8 +158,16 @@ function Music() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Lấy danh sách album từ songs
-  const albums = useMemo(() => ["All", ...new Set(songs.map(song => song.album))], [songs]);
+  // Lấy danh sách album từ các bài hát
+  const albums = useMemo(() => {
+    const allAlbums = songs
+      .map(song => song.album)  // Lấy chuỗi album của mỗi bài hát
+      .join(",")                // Nối tất cả lại thành một chuỗi
+      .split(",")               // Phân tách chuỗi thành mảng
+      .map(album => album.trim())  // Loại bỏ khoảng trắng
+      .filter((value, index, self) => self.indexOf(value) === index);  // Lọc các album trùng
+    return ["All", ...allAlbums];  // Thêm "All" vào đầu danh sách
+  }, [songs]);
 
   // Lấy dữ liệu từ URL
   const params = useMemo(() => new URLSearchParams(location.search), [location.search]);
@@ -151,11 +182,14 @@ function Music() {
 
   // Lọc danh sách bài hát theo album
   const filteredSongs = useMemo(() => {
-    return selectedAlbum === "All" ? songs : songs.filter(song => song.album === selectedAlbum);
+    if (!songs || songs.length === 0) return [];
+    return selectedAlbum === "All"
+      ? songs
+      : songs.filter(song => song.album.split(",").map(album => album.trim()).includes(selectedAlbum)); // Kiểm tra xem album có trong chuỗi album của bài hát
   }, [selectedAlbum, songs]);
 
-  // Lấy danh sách bài hát trên trang hiện tại
   const currentSongs = useMemo(() => {
+    if (!filteredSongs || filteredSongs.length === 0) return [];
     const start = (currentPage - 1) * songsPerPage;
     return filteredSongs.slice(start, start + songsPerPage);
   }, [filteredSongs, currentPage]);
@@ -165,12 +199,30 @@ function Music() {
     newParams.set("album", selectedAlbum);
     newParams.set("page", currentPage);
     navigate(`?${newParams.toString()}`, { replace: true });
+    setCurrentPlaying(null);
   }, [selectedAlbum, currentPage, navigate]);
 
   const totalPages = Math.ceil(filteredSongs.length / songsPerPage);
 
   const handlePlay = (index) => {
-    setCurrentPlaying(currentPlaying === index ? null : index);
+    setCurrentPlaying(index);
+  };
+
+  const handleNextSong = () => {
+    const nextIndex = currentPlaying + 1;
+    if (nextIndex < currentSongs.length) {
+      setCurrentPlaying(nextIndex);
+    } else {
+      // Nếu hết bài trên trang, chuyển sang trang tiếp theo
+      if (currentPage < totalPages) {
+        setCurrentPage((prev) => prev + 1);
+        setCurrentPlaying(0); // Phát bài đầu tiên của trang mới
+      } else {
+        // Nếu hết tất cả trang, quay lại bài đầu tiên của album
+        setCurrentPage(1);
+        setCurrentPlaying(0);
+      }
+    }
   };
 
   const handlePageClick = ({ selected }) => {
@@ -181,7 +233,10 @@ function Music() {
     <div className="Music">
       <h1 className="Music-heading">Michael Jackson’s Top Songs</h1>
 
-      <select className="Music-filter" value={selectedAlbum} onChange={(e) => setSelectedAlbum(e.target.value)}>
+      <select className="Music-filter" value={selectedAlbum} onChange={(e) => {
+        setSelectedAlbum(e.target.value);
+        setCurrentPage(1); // Reset về trang 1 khi đổi album
+      }}>
         {albums.map(album => (
           <option key={album} value={album}>{album}</option>
         ))}
@@ -191,10 +246,11 @@ function Music() {
         {currentSongs.length > 0 ? (
           currentSongs.map((song, index) => (
             <MusicPlayer
-              key={song.id}
+              key={song.title} // Dùng title làm key vì song.id có thể không duy nhất
               song={song}
               isPlaying={currentPlaying === index}
               onPlay={() => handlePlay(index)}
+              onEnd={handleNextSong} // Truyền sự kiện khi kết thúc bài
             />
           ))
         ) : (
@@ -224,7 +280,5 @@ function Music() {
     </div>
   );
 }
-
-
 
 export default Music;
