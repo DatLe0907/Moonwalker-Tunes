@@ -1,0 +1,74 @@
+.Music-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+  }
+  
+  .Music-search .search-input {
+    width: 300px;
+    padding: 12px;
+    border: 2px solid #444;
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s ease-in-out;
+    padding-left: 15px;
+  }
+  
+  .Music-search .search-input:focus {
+    border-color: #ffcc00;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+  }
+
+  .search-button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .search-button:hover {
+    background-color: #ffaa00;
+  }
+  
+  .search-button:active {
+    transform: scale(0.95);
+  }
+  
+
+  .suggestions {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0; /* Khoảng cách giữa input và danh sách gợi ý */
+    position: absolute;
+    top: 100%; /* Đẩy danh sách xuống ngay dưới ô nhập */
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 10;
+  }
+  
+  .suggestions li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .suggestions li:hover {
+    background: #f1f1f1;
+  }
+  
+  

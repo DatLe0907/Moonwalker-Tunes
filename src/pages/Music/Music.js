@@ -1,9 +1,11 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import MusicPlayer from "./MusicPlayer";
+import FindSong from "./FindSong"
+import AlbumFilter from "./AlbumFilter";
 import "./Music.css"
 
 const songs = [
@@ -36,6 +38,7 @@ const songs = [
   { title: "Butterflies", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/wthgd_Rg1qg?si=Zr-_0_1C8iC6ILxe?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Speechless", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/csARzcsjark?si=8yipJ8XbuNWu2qKQ?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "You Rock My World", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/g4tpuu-Up90?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Unbreakable", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/WNQiROr5_AY?si=oMOdOiaMJGbkcwZW?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Break of Dawn", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/O8ELJ_Eh8A0?si=RcYFOPMDjqXBmVvi?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Dangerous", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/7jTq2FXKr0g?si=jtKelPURTzEudLzM?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "In the Closet", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/4qLY0vbrT8Q?si=77XQnw7dp6qrnpTL?rel=0&controls=0&modestbranding=1&showinfo=0" },
@@ -43,7 +46,7 @@ const songs = [
   { title: "Why You Wanna Trip on Me", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/C2FUzoy-UCg?si=f1JKKFzUWTPYpOkB?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Gone Too Soon", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/IcNamirwTaY?si=zM0ln_G904M7WuhW?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "She Drives Me Wild", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/kRp_FqCmsVA?si=mhb5xPvEsuLGY5Mg?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "She's Out of My Life", author: "Michael Jackson", album: "Off the Wall, HIStory", src: "https://www.youtube.com/embed/6DQJPL9Yuq0?si=bapWHdfNp9ZoW11H?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "She's Out of My Life", author: "Michael Jackson", album: "Off the all, HIStory", src: "https://www.youtube.com/embed/6DQJPL9Yuq0?si=bapWHdfNp9ZoW11H?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Keep the Faith", author: "Michael Jackson", album: "Dangerous", src: "https://www.youtube.com/embed/vIEiP7kzGjI?si=t4UWO07AdvLK68kZ?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Someone Put Your Hand Out", author: "Michael Jackson", album: "Unreleased", src: "https://www.youtube.com/embed/jADX57wacsA?si=DXIpno-7rUtonSr6?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "For All Time", author: "Michael Jackson", album: "Unreleased", src: "https://www.youtube.com/embed/54703WkoChI?si=ZN5VTsEArzMiilS-?rel=0&controls=0&modestbranding=1&showinfo=0" },
@@ -83,7 +86,10 @@ const songs = [
   { title: "Privacy", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/IAX8rVcbUIQ?si=t4u2A7h_k62Kzp4a?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Don't Walk Away", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/8OVAbsEhKQw?si=Zurd8MVZKM9YrWcV?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "The Lost Children", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/1UoPNNzWUjk?si=Y-4rDlHAPrsSXY5A?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Heart Breaker", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/CVd2A3F3UQw?si=J2MurRC3zCwIJGsl?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Heaven Can Wait", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/TDVlDUAIz5k?si=SmKTs4gjnfRP6ikP?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Invincible", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/kXzM0zmDEek?si=chtvUBYoeRPZ1EGN?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Cry", author: "Michael Jackson", album: "Invincible", src: "https://www.youtube.com/embed/mj3MfUR35CM?si=K8-HpIJhx6NmdyOZ?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Shout", author: "Michael Jackson", album: "Unreleased", src: "https://www.youtube.com/embed/O4o7rpbeTtY?si=3yXeTu-lREihDUSQ?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "We've Got a Good Thing Going", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/OTAfjaOWnH4?si=mV9fwXXM1nr3mCPr?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Ben", author: "Michael Jackson", album: "Ben", src: "https://www.youtube.com/embed/i7TTSzfs2kw?si=xvGqJ3ammHmLGEnE?rel=0&controls=0&modestbranding=1&showinfo=0" },
@@ -147,49 +153,50 @@ const songs = [
   { title: "Ride With Me", author: "Michael Jackson", album: "Unreleased", src: "https://www.youtube.com/embed/7Sm8eSyM2Ik?si=u4cEzQT1jsuz215n?rel=0&controls=0&modestbranding=1&showinfo=0" },
 ];
 
+// const songs = [
+//   { title: "Thriller", author: "Michael Jackson", album: "Thriller, HIStory", src: "https://www.youtube.com/embed/0JFbiCg-8n4?si=ICb4dAVdczaiP9dE?rel=0&controls=0&modestbranding=1&showinfo=0" },
+//   { title: "Billie Jean", author: "Michael Jackson", album: "Thriller, HIStory", src: "https://www.youtube.com/embed/Zi_XLOBDo_Y?rel=0&controls=0&modestbranding=1&showinfo=0" },
+//   { title: "Beat It", author: "Michael Jackson", album: "Thriller, HIStory", src: "https://www.youtube.com/embed/oRdxUFDoQe0?rel=0&controls=0&modestbranding=1&showinfo=0" },
+// ]
 const songsPerPage = 8;
-
 
 function Music() {
   const [currentPlaying, setCurrentPlaying] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filteredSongs, setFilteredSongs] = useState([]);
   const [selectedAlbum, setSelectedAlbum] = useState("All");
+  const [highlightedSong, setHighlightedSong] = useState(null);
+  const songRefs = useRef({}); // 🔥 Dùng object để lưu refs theo title
 
   const navigate = useNavigate();
   const location = useLocation();
-
-  // Lấy danh sách album từ các bài hát
-  const albums = useMemo(() => {
-    const allAlbums = songs
-      .map(song => song.album)  // Lấy chuỗi album của mỗi bài hát
-      .join(",")                // Nối tất cả lại thành một chuỗi
-      .split(",")               // Phân tách chuỗi thành mảng
-      .map(album => album.trim())  // Loại bỏ khoảng trắng
-      .filter((value, index, self) => self.indexOf(value) === index);  // Lọc các album trùng
-    return ["All", ...allAlbums];  // Thêm "All" vào đầu danh sách
-  }, [songs]);
-
-  // Lấy dữ liệu từ URL
   const params = useMemo(() => new URLSearchParams(location.search), [location.search]);
 
   useEffect(() => {
     const savedAlbum = params.get("album") || "All";
     const savedPage = parseInt(params.get("page"), 10) || 1;
-
     setSelectedAlbum(savedAlbum);
     setCurrentPage(savedPage);
   }, [params]);
 
-  // Lọc danh sách bài hát theo album
-  const filteredSongs = useMemo(() => {
-    if (!songs || songs.length === 0) return [];
-    return selectedAlbum === "All"
-      ? songs
-      : songs.filter(song => song.album.split(",").map(album => album.trim()).includes(selectedAlbum)); // Kiểm tra xem album có trong chuỗi album của bài hát
+  // ✅ Lọc bài hát theo album ngay từ đầu
+  useEffect(() => {
+    let sortedSongs = [...songs];
+
+    if (selectedAlbum !== "All") {
+      sortedSongs = sortedSongs.filter(song =>
+        song.album
+          .split(",")
+          .map(a => a.trim())
+          .includes(selectedAlbum)
+      );
+    }
+    
+    setFilteredSongs(sortedSongs); // 🔥 Cập nhật danh sách bài hát
   }, [selectedAlbum, songs]);
 
+  // Lấy danh sách bài hát theo trang
   const currentSongs = useMemo(() => {
-    if (!filteredSongs || filteredSongs.length === 0) return [];
     const start = (currentPage - 1) * songsPerPage;
     return filteredSongs.slice(start, start + songsPerPage);
   }, [filteredSongs, currentPage]);
@@ -199,8 +206,9 @@ function Music() {
     newParams.set("album", selectedAlbum);
     newParams.set("page", currentPage);
     navigate(`?${newParams.toString()}`, { replace: true });
-    setCurrentPlaying(null);
-  }, [selectedAlbum, currentPage, navigate]);
+  }, [currentPage, selectedAlbum, navigate]);
+
+  
 
   const totalPages = Math.ceil(filteredSongs.length / songsPerPage);
 
@@ -212,49 +220,100 @@ function Music() {
     const nextIndex = currentPlaying + 1;
     if (nextIndex < currentSongs.length) {
       setCurrentPlaying(nextIndex);
+    } else if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+      setCurrentPlaying(0);
     } else {
-      // Nếu hết bài trên trang, chuyển sang trang tiếp theo
-      if (currentPage < totalPages) {
-        setCurrentPage((prev) => prev + 1);
-        setCurrentPlaying(0); // Phát bài đầu tiên của trang mới
-      } else {
-        // Nếu hết tất cả trang, quay lại bài đầu tiên của album
-        setCurrentPage(1);
-        setCurrentPlaying(0);
-      }
+      setCurrentPage(1);
+      setCurrentPlaying(0);
     }
   };
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected + 1);
+    setCurrentPlaying(null);
   };
+
+  // 🔥 Scroll đến bài hát
+  const scrollToSong = (title) => {
+    const songElement = songRefs.current[title];
+    if (songElement) {
+      songElement.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
+  // ✅ Tìm kiếm bài hát chính xác hơn
+  const handleSearch = (query) => {
+    setCurrentPlaying(null);
+  
+    // 🔍 Tìm kiếm bài hát trong toàn bộ danh sách songs
+    const foundSong = songs.find((song) =>
+      song.title.toLowerCase().includes(query.toLowerCase())
+    );
+  
+    if (foundSong) {
+      // 📌 Xác định album chứa bài hát
+      const foundAlbum = foundSong.album.split(",")[0].trim();
+      setSelectedAlbum(foundAlbum);
+      setCurrentPage(1);
+  
+      // 🔄 Cập nhật URL với album và page mới
+      const newParams = new URLSearchParams();
+      newParams.set("album", foundAlbum);
+      newParams.set("page", 1);
+      navigate(`?${newParams.toString()}`, { replace: true });
+  
+      // 🔥 Đợi album cập nhật rồi cuộn đến bài hát
+      setTimeout(() => {
+        scrollToSong(foundSong.title);
+        setHighlightedSong(foundSong.title);
+  
+        // ✨ Hiệu ứng lắc bài hát
+        setTimeout(() => {
+          setHighlightedSong(null);
+        }, 800);
+      }, 500);
+    }
+  };
+  
 
   return (
     <div className="Music">
       <h1 className="Music-heading">Michael Jackson’s Top Songs</h1>
 
-      <select className="Music-filter" value={selectedAlbum} onChange={(e) => {
-        setSelectedAlbum(e.target.value);
-        setCurrentPage(1); // Reset về trang 1 khi đổi album
-      }}>
-        {albums.map(album => (
-          <option key={album} value={album}>{album}</option>
-        ))}
-      </select>
+      <div className="Music-control">
+        <FindSong songs={songs} onSearchResults={setFilteredSongs} onSearch={handleSearch} scrollToSong={scrollToSong} />
+
+        <AlbumFilter
+          songs={songs}
+          selectedAlbum={selectedAlbum}
+          setSelectedAlbum={setSelectedAlbum}
+          onFilter={setFilteredSongs}
+          setCurrentPage={setCurrentPage} // ✅ Truyền setCurrentPage
+        />
+      </div>
 
       <div className="Music-box">
         {currentSongs.length > 0 ? (
-          currentSongs.map((song, index) => (
-            <MusicPlayer
-              key={song.title} // Dùng title làm key vì song.id có thể không duy nhất
-              song={song}
-              isPlaying={currentPlaying === index}
-              onPlay={() => handlePlay(index)}
-              onEnd={handleNextSong} // Truyền sự kiện khi kết thúc bài
-            />
-          ))
+          currentSongs.map((song, index) => {
+            const globalIndex = (currentPage - 1) * songsPerPage + index;
+            return (
+                <MusicPlayer
+                  key={song.title} 
+                  ref={(el) => (songRefs.current[song.title] = el)}
+                  song={song}
+                  isPlaying={currentPlaying === index}
+                  onPlay={() => handlePlay(index)}
+                  onEnd={handleNextSong}
+                  isHighlighted={highlightedSong === globalIndex}
+                />
+            );
+          })
         ) : (
-          <p className="Music-no-results">No songs found for this album.</p>
+          <p className="Music-no-results">No songs found.</p>
         )}
       </div>
 
@@ -282,3 +341,4 @@ function Music() {
 }
 
 export default Music;
+

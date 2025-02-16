@@ -3,7 +3,7 @@ import "./MusicPlayer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 
-export default function MusicPlayer({ song, isPlaying, onPlay, onEnd }) {
+export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighlighted, key, ref }) {
   const playerRef = useRef(null);
   const [player, setPlayer] = useState(null);
   const [progress, setProgress] = useState(0);
@@ -12,7 +12,6 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd }) {
   const [isReplay, setIsReplay] = useState(false);
 
   const getYouTubeId = (url) => url.match(/embed\/([a-zA-Z0-9_-]+)/)?.[1] || null;
-
   useEffect(() => {
     if (!isPlaying) return;
 
@@ -28,6 +27,17 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd }) {
     }
   }, [isPlaying, isReplay]);
 
+  useEffect(() => {
+    const resumePlayback = () => {
+      if (player && isPlaying) {
+        player.playVideo();
+      }
+    };
+  
+    document.addEventListener("resumeMusic", resumePlayback);
+    return () => document.removeEventListener("resumeMusic", resumePlayback);
+  }, [player, isPlaying]);
+  
   const loadVideo = () => {
     const videoId = getYouTubeId(song.src);
     if (!videoId || !playerRef.current) return;
@@ -46,7 +56,7 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd }) {
         showinfo: 0,
         disablekb: 1,
         loop: isReplay ? 1 : 0,
-        playlist: isReplay ? videoId : undefined,
+        playlist: videoId,
       },
       events: {
         onReady: (event) => {
@@ -100,7 +110,7 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd }) {
   };
 
   return (
-    <div className="music-card">
+    <div className={`music-card ${isHighlighted ? "shake" : ""}`} key={key} ref={ref}>
       {isPlaying ? (
         <>
           <div className="music-player">

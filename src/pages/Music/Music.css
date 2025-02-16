@@ -6,7 +6,7 @@
   margin-top: 60px;
   font-size: 16px;
   position: relative;
-  padding-bottom: 50px; 
+  padding-bottom: 50px;
   min-height: 80vh;
 }
 
@@ -17,68 +17,15 @@
   margin-bottom: 20px;
 }
 
-.Music .Music-filter {
-  margin-bottom: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-family: 'Arial', sans-serif;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  color: #333;
-  width: 250px; /* Wider dropdown for better readability */
-  transition: all 0.3s ease;
-  cursor: pointer;
-  -webkit-appearance: none;  /* Remove default styling in WebKit-based browsers */
-  -moz-appearance: none;     /* Remove default styling in Firefox */
-  appearance: none;          /* Remove default styling in other browsers */
-}
-
-.Music-filter:hover {
-  border-color: #007bff;
-  background-color: #e8f4ff;
-}
-
-.Music-filter:focus {
-  outline: none;
-  border-color: #007bff;
-  background-color: #e8f4ff;
-}
-
-.Music-filter option {
-  padding: 10px;
-  font-size: 14px;
-  background-color: #f9f9f9;
-  color: #333;
-  border: none;
-}
-
-.Music-filter option:hover {
-  background-color: #007bff;
-  color: white;
-}
-
-.Music-filter option:checked {
-  background-color: #007bff;
-  color: white;
-}
-
-.Music-filter option:focus {
-  background-color: #e8f4ff;
-  color: #007bff;
-}
-
-/* Hide the default dropdown icon */
-.Music-filter::-ms-expand {
-  display: none;
-}
-
-/* Style the select box with a custom arrow */
-.Music-filter {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M143 352c-9.3 0-18.6-3.7-25.3-10.4l-96-96c-12.5-12.5-12.5-32.8 0-45.3l96-96c12.5-12.5 32.8-12.5 45.3 0 12.5 12.5 12.5 32.8 0 45.3l-71.1 71.1 71.1 71.1c12.5 12.5 12.5 32.8 0 45.3-6.7 6.7-15.9 10.4-25.3 10.4z"></path></svg>');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 16px;
+.Music .Music-control{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    border-radius: 8px;
 }
 
 .Music .Music-box {
@@ -89,8 +36,6 @@
   gap: 20px;
   border-radius: 12px;
 }
-
-
 
 .Music-pagination {
   width: 100%;
@@ -120,11 +65,11 @@
 }
 
 .Music-pagination li a:hover {
-  background-color: #F3CF0D;
+  background-color: #f3cf0d;
 }
 
 .Music-pagination .active a {
-  background-color: #F3CF0D;
+  background-color: #f3cf0d;
   color: black;
   font-weight: bold;
 }
@@ -139,10 +84,8 @@
   cursor: not-allowed;
 }
 
-
-
 /* Tablet */
-@media (max-width: 1023px) {
+@media (max-width: 1350px) {
   .Music .Music-box {
     /* display: block; */
     justify-content: center;
@@ -155,8 +98,9 @@
     /* display: block; */
     justify-content: center;
     gap: 5px;
+    
+  }
+  .Music .Music-control{
+    flex-direction: column-reverse;
   }
 }
-
-
-
