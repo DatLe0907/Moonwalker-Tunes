@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Moonwalker-Tunes/static/css/main.3f744457.css",
-    "main.js": "/Moonwalker-Tunes/static/js/main.35cdae78.js",
+    "main.css": "/Moonwalker-Tunes/static/css/main.c61e0962.css",
+    "main.js": "/Moonwalker-Tunes/static/js/main.d17dd70d.js",
     "static/js/488.1101ae29.chunk.js": "/Moonwalker-Tunes/static/js/488.1101ae29.chunk.js",
     "static/media/kick.gif": "/Moonwalker-Tunes/static/media/kick.3e15338ed9d88a99701f.gif",
     "static/media/antigravity-lean.gif": "/Moonwalker-Tunes/static/media/antigravity-lean.6077ddfc95c362f7517c.gif",
@@ -17,12 +17,12 @@
     "static/media/crotch-cb.gif": "/Moonwalker-Tunes/static/media/crotch-cb.78edabe526659599f5a4.gif",
     "static/media/mj-global-heat-map.png": "/Moonwalker-Tunes/static/media/mj-global-heat-map.b93a69ff4ec71a807bc8.png",
     "index.html": "/Moonwalker-Tunes/index.html",
-    "main.3f744457.css.map": "/Moonwalker-Tunes/static/css/main.3f744457.css.map",
-    "main.35cdae78.js.map": "/Moonwalker-Tunes/static/js/main.35cdae78.js.map",
+    "main.c61e0962.css.map": "/Moonwalker-Tunes/static/css/main.c61e0962.css.map",
+    "main.d17dd70d.js.map": "/Moonwalker-Tunes/static/js/main.d17dd70d.js.map",
     "488.1101ae29.chunk.js.map": "/Moonwalker-Tunes/static/js/488.1101ae29.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3f744457.css",
-    "static/js/main.35cdae78.js"
+    "static/css/main.c61e0962.css",
+    "static/js/main.d17dd70d.js"
   ]
 }
