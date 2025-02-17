@@ -97,17 +97,23 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighligh
   };
 
   const handleSeekEnd = () => {
-    player?.seekTo(currentTime, true);
+    if (player) {
+      player.seekTo(currentTime, true);
+    }
   };
+  
 
   const handleClickOnProgress = (e) => {
     if (!player) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const newTime = ((e.clientX - rect.left) / rect.width) * videoDuration;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const newTime = ((clientX - rect.left) / rect.width) * videoDuration;
+    
     setCurrentTime(newTime);
     setProgress((newTime / videoDuration) * 100);
     player.seekTo(newTime, true);
   };
+  
 
   return (
     <div className={`music-card ${isHighlighted ? "shake" : ""}`} key={key} ref={ref}>
@@ -125,6 +131,7 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighligh
                 value={currentTime}
                 onChange={(e) => setCurrentTime(parseFloat(e.target.value))}
                 onMouseUp={handleSeekEnd}
+                onTouchEnd={handleSeekEnd}
                 className="progress-slider"
                 style={{ "--progress": `${progress}%` }}
               />

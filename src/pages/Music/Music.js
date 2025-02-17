@@ -249,27 +249,29 @@ function Music() {
   const handleSearch = (query) => {
     setCurrentPlaying(null);
   
-    // 🔍 Tìm kiếm bài hát trong toàn bộ danh sách songs
-    const foundSong = songs.find((song) =>
+    // 🔍 Tìm bài hát trong toàn bộ danh sách
+    const foundSongIndex = songs.findIndex((song) =>
       song.title.toLowerCase().includes(query.toLowerCase())
     );
   
-    if (foundSong) {
-      // 📌 Xác định album chứa bài hát
-      const foundAlbum = foundSong.album.split(",")[0].trim();
-      setSelectedAlbum(foundAlbum);
-      setCurrentPage(1);
+    if (foundSongIndex !== -1) {
+      // 📌 Xác định trang chứa bài hát
+      const newPage = Math.floor(foundSongIndex / songsPerPage) + 1;
   
-      // 🔄 Cập nhật URL với album và page mới
+      // 🔄 Đặt album về "All" để đảm bảo bài hát hiển thị
+      setSelectedAlbum("All");
+      setCurrentPage(newPage);
+  
+      // 🌍 Cập nhật URL
       const newParams = new URLSearchParams();
-      newParams.set("album", foundAlbum);
-      newParams.set("page", 1);
+      newParams.set("album", "All");
+      newParams.set("page", newPage);
       navigate(`?${newParams.toString()}`, { replace: true });
   
-      // 🔥 Đợi album cập nhật rồi cuộn đến bài hát
+      // 🔥 Đợi danh sách cập nhật xong rồi cuộn đến bài hát
       setTimeout(() => {
-        scrollToSong(foundSong.title);
-        setHighlightedSong(foundSong.title);
+        scrollToSong(songs[foundSongIndex].title);
+        setHighlightedSong(songs[foundSongIndex].title);
   
         // ✨ Hiệu ứng lắc bài hát
         setTimeout(() => {
@@ -279,13 +281,22 @@ function Music() {
     }
   };
   
+  
 
   return (
     <div className="Music">
       <h1 className="Music-heading">Michael Jackson’s Top Songs</h1>
 
       <div className="Music-control">
-        <FindSong songs={songs} onSearchResults={setFilteredSongs} onSearch={handleSearch} scrollToSong={scrollToSong} />
+        <FindSong 
+          songs={songs} 
+          onSearch={handleSearch} 
+          scrollToSong={scrollToSong} 
+          setSelectedAlbum={setSelectedAlbum} // ✅ Cho phép FindSong cập nhật album
+          setCurrentPage={setCurrentPage} // ✅ Reset về trang 1
+          navigate={navigate} // ✅ Truyền navigate để cập nhật URL
+        />
+
 
         <AlbumFilter
           songs={songs}

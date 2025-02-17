@@ -3,14 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "./FindSong.css";
 
-const FindSong = ({ onSearch, songs, scrollToSong }) => {
+const FindSong = ({ onSearch, songs, scrollToSong, setSelectedAlbum, setCurrentPage, navigate }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
   const handleInputChange = (e) => {
     const query = e.target.value.trim().toLowerCase();
     setSearchQuery(query);
-  
+
     if (query === "") {
       setSuggestions([]);
     } else {
@@ -19,7 +19,7 @@ const FindSong = ({ onSearch, songs, scrollToSong }) => {
         const firstLetters = words.map(word => word.charAt(0)).join("");
 
         return (
-          song.title.toLowerCase().startsWith(query) ||
+          song.title.toLowerCase().includes(query) || 
           firstLetters.startsWith(query.replace(/\s+/g, ""))
         );
       });
@@ -31,16 +31,13 @@ const FindSong = ({ onSearch, songs, scrollToSong }) => {
   const handleSearch = () => {
     if (searchQuery.trim() === "") return;
     onSearch(searchQuery);
-    scrollToSong(searchQuery);
-    setSearchQuery(""); // 🔥 Xóa nội dung input sau khi tìm kiếm
-    setSuggestions([]);
+    setSearchQuery("");
   };
 
   const handleSuggestionClick = (title) => {
     setSearchQuery("");
     setSuggestions([]);
-    onSearch(title);
-    scrollToSong(title);
+    handleSearch(title);
   };
 
   const handleKeyDown = (event) => {
@@ -76,5 +73,6 @@ const FindSong = ({ onSearch, songs, scrollToSong }) => {
     </div>
   );
 };
+
 
 export default FindSong;
