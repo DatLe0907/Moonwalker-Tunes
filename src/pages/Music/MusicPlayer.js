@@ -116,7 +116,7 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighligh
   
 
   return (
-    <div className={`music-card ${isHighlighted ? "shake" : ""}`} key={key} ref={ref}>
+    <div className={`music-card ${isHighlighted ? "highlight" : ""}`} key={key} ref={ref}>
       {isPlaying ? (
         <>
           <div className="music-player">

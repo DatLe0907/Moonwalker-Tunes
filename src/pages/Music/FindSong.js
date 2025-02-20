@@ -8,9 +8,9 @@ const FindSong = ({ onSearch, songs, scrollToSong, setSelectedAlbum, setCurrentP
   const [suggestions, setSuggestions] = useState([]);
 
   const handleInputChange = (e) => {
-    const query = e.target.value.trim().toLowerCase();
+    const query = e.target.value.toLowerCase();
     setSearchQuery(query);
-
+  
     if (query === "") {
       setSuggestions([]);
     } else {
@@ -19,7 +19,7 @@ const FindSong = ({ onSearch, songs, scrollToSong, setSelectedAlbum, setCurrentP
         const firstLetters = words.map(word => word.charAt(0)).join("");
 
         return (
-          song.title.toLowerCase().includes(query) || 
+          song.title.toLowerCase().startsWith(query) ||
           firstLetters.startsWith(query.replace(/\s+/g, ""))
         );
       });
@@ -32,12 +32,13 @@ const FindSong = ({ onSearch, songs, scrollToSong, setSelectedAlbum, setCurrentP
     if (searchQuery.trim() === "") return;
     onSearch(searchQuery);
     setSearchQuery("");
+    setSuggestions([]); // 🔥 Ẩn suggestions sau khi tìm kiếm
   };
 
   const handleSuggestionClick = (title) => {
     setSearchQuery("");
     setSuggestions([]);
-    handleSearch(title);
+    onSearch(title);
   };
 
   const handleKeyDown = (event) => {
@@ -73,6 +74,5 @@ const FindSong = ({ onSearch, songs, scrollToSong, setSelectedAlbum, setCurrentP
     </div>
   );
 };
-
 
 export default FindSong;
