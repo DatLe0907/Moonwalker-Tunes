@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Moonwalker-Tunes/static/css/main.e0d4bd43.css",
-    "main.js": "/Moonwalker-Tunes/static/js/main.cf12b85b.js",
+    "main.css": "/Moonwalker-Tunes/static/css/main.15bd4252.css",
+    "main.js": "/Moonwalker-Tunes/static/js/main.0fbf3aab.js",
     "static/js/488.1101ae29.chunk.js": "/Moonwalker-Tunes/static/js/488.1101ae29.chunk.js",
     "static/media/kick.gif": "/Moonwalker-Tunes/static/media/kick.3e15338ed9d88a99701f.gif",
     "static/media/antigravity-lean.gif": "/Moonwalker-Tunes/static/media/antigravity-lean.6077ddfc95c362f7517c.gif",
@@ -11,18 +11,15 @@
     "static/media/circle-slide.gif": "/Moonwalker-Tunes/static/media/circle-slide.5bb255b10899522e919c.gif",
     "static/media/shuffle.gif": "/Moonwalker-Tunes/static/media/shuffle.c0dd4ec8ea326aefb231.gif",
     "static/media/toe-stand.gif": "/Moonwalker-Tunes/static/media/toe-stand.adc010616e85286cd08b.gif",
-    "static/media/slider-3.jpg": "/Moonwalker-Tunes/static/media/slider-3.6113ce42c68140acba2c.jpg",
-    "static/media/slider-2.jpg": "/Moonwalker-Tunes/static/media/slider-2.cf3f2bf1aad6e2f30b31.jpg",
-    "static/media/slider-1.jpg": "/Moonwalker-Tunes/static/media/slider-1.ec40892c4be1c5575358.jpg",
     "static/media/crotch-cb.gif": "/Moonwalker-Tunes/static/media/crotch-cb.78edabe526659599f5a4.gif",
     "static/media/mj-global-heat-map.png": "/Moonwalker-Tunes/static/media/mj-global-heat-map.b93a69ff4ec71a807bc8.png",
     "index.html": "/Moonwalker-Tunes/index.html",
-    "main.e0d4bd43.css.map": "/Moonwalker-Tunes/static/css/main.e0d4bd43.css.map",
-    "main.cf12b85b.js.map": "/Moonwalker-Tunes/static/js/main.cf12b85b.js.map",
+    "main.15bd4252.css.map": "/Moonwalker-Tunes/static/css/main.15bd4252.css.map",
+    "main.0fbf3aab.js.map": "/Moonwalker-Tunes/static/js/main.0fbf3aab.js.map",
     "488.1101ae29.chunk.js.map": "/Moonwalker-Tunes/static/js/488.1101ae29.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e0d4bd43.css",
-    "static/js/main.cf12b85b.js"
+    "static/css/main.15bd4252.css",
+    "static/js/main.0fbf3aab.js"
   ]
 }
