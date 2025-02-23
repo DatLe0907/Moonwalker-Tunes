@@ -17,13 +17,19 @@
   background-size: cover;
   background-position: center;
   transition: background-image 0.5s ease-in-out;
+  image-rendering: crisp-edges;
+  filter: contrast(120%) brightness(105%);
 }
 
 .slider .slider-text {
   position: absolute;
   bottom: 5vh;
   color: #fff;
-  text-shadow: 0 0 10px #111;
+  text-shadow: 
+    -1px -1px 1px black, 
+     1px -1px 1px black, 
+    -1px  1px 1px black, 
+     1px  1px 1px black;
   text-align: center;
   width: 90%;
   font-size: 16px;
@@ -38,7 +44,7 @@
   display: block;
   font-family: "Great Vibes", cursive;
   font-style: italic;
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin-top: 8px;
 }
 

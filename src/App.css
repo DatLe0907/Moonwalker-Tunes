@@ -45,3 +45,11 @@ body {
 											  rgba(0, 0, 0, 1) 75%,
 											  transparent)
 }
+
+
+.title{
+  font-family: "Oswald", sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}

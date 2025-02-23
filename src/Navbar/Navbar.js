@@ -46,7 +46,7 @@ function Navbar() {
       </i>
 
       {/* ✅ Gán ref vào menu */}
-      <div ref={menuRef} className={`menu ${menuOpen ? "active" : ""}`}>
+      <div ref={menuRef} className={`menu ${menuOpen ? "active" : ""}`} onClick={() => setMenuOpen(false)}>
         <div className="home">
           <Link to="/">Home</Link>
         </div>

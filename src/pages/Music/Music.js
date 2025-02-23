@@ -127,8 +127,8 @@ const songs = [
   { title: "Blue Gangsta", author: "Michael Jackson", album: "Xscape", src: "https://www.youtube.com/embed/a-sPK4hbtkE?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "A Place with No Name", author: "Michael Jackson", album: "Xscape", src: "https://www.youtube.com/embed/YlJvMU-5NyA?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Slave to the Rhythm", author: "Michael Jackson", album: "Xscape", src: "https://www.youtube.com/embed/MuTgX_A52Eo?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Love Never Felt So Good", author: "Michael Jackson", album: "Xscape", src: "https://www.youtube.com/embed/GJDdBbgJafU?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Love Never Felt So Good (Solo)", author: "Michael Jackson, Justin Timberlake", album: "Xscape", src: "https://www.youtube.com/embed/oG08ukJPtR8?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Love Never Felt So Good", author: "Michael Jackson, Justin Timberlake", album: "Xscape", src: "https://www.youtube.com/embed/GJDdBbgJafU?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Love Never Felt So Good (Solo)", author: "Michael Jackson", album: "Xscape", src: "https://www.youtube.com/embed/oG08ukJPtR8?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Chicago", author: "Michael Jackson", album: "Xscape", src: "https://www.youtube.com/embed/Y_8mUx4VOmo?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Do You Know Where Your Children Are", author: "Michael Jackson", album: "Xscape", src: "https://www.youtube.com/embed/GNMhFnV8o1U?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Loving You", author: "Michael Jackson", album: "Xscape", src: "https://www.youtube.com/embed/lDnz7oJv18E?rel=0&controls=0&modestbranding=1&showinfo=0" },
@@ -165,6 +165,7 @@ const songs = [
 //   { title: "Billie Jean", author: "Michael Jackson", album: "Thriller, HIStory", src: "https://www.youtube.com/embed/Zi_XLOBDo_Y?rel=0&controls=0&modestbranding=1&showinfo=0" },
 //   { title: "Beat It", author: "Michael Jackson", album: "Thriller, HIStory", src: "https://www.youtube.com/embed/oRdxUFDoQe0?rel=0&controls=0&modestbranding=1&showinfo=0" },
 // ]
+
 const songsPerPage = 8;
 
 function Music() {
@@ -173,7 +174,7 @@ function Music() {
   const [filteredSongs, setFilteredSongs] = useState([]);
   const [selectedAlbum, setSelectedAlbum] = useState("All");
   const [highlightedSong, setHighlightedSong] = useState(null);
-  const songRefs = useRef({}); // 🔥 Dùng object để lưu refs theo title
+  const songRefs = useRef({}); 
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -186,7 +187,12 @@ function Music() {
     setCurrentPage(savedPage);
   }, [params]);
 
-  // ✅ Lọc bài hát theo album ngay từ đầu
+  useEffect(() => {
+    setCurrentPlaying(null); // Reset bài hát đang phát
+  }, [selectedAlbum]); // Chạy khi đổi album hoặc trang
+  
+
+  // Lọc bài hát theo album ban đầu
   useEffect(() => {
     let sortedSongs = [...songs];
 
@@ -199,7 +205,7 @@ function Music() {
       );
     }
     
-    setFilteredSongs(sortedSongs); // 🔥 Cập nhật danh sách bài hát
+    setFilteredSongs(sortedSongs); // Cập nhật danh sách bài hát
   }, [selectedAlbum, songs]);
 
   // Lấy danh sách bài hát theo trang

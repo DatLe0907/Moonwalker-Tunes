@@ -12,6 +12,8 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighligh
   const [isReplay, setIsReplay] = useState(false);
 
   const getYouTubeId = (url) => url.match(/embed\/([a-zA-Z0-9_-]+)/)?.[1] || null;
+
+  
   useEffect(() => {
     if (!isPlaying) return;
 

@@ -27,7 +27,7 @@ const PopularStyle = {
 function Info(){
     return(
         <div className="Info">
-            <h1 className="Info-heading">Biography</h1>
+            <h1 className="title Info-heading">Biography</h1>
             <div className="Info-box">
                 <div className="mj-info img" style = {InfoStyle} alt="" />
                 <div className = "Info-content">
