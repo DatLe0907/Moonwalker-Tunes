@@ -131,7 +131,7 @@ const BlindBox = () => {
   return (
     <div className="Shop">
       <div className="title Shop-title">Shop</div>
-      <div className="Shop-content">Random blind box system where you can spend 5 tokens per attempt to receive a Michael Jackson-themed sticker or wallpaper. Each item has a different rarity level—Common, Rare, or Legendary—with different drop rates.</div>
+      <div className="Shop-content">Random blind box system where you can spend {cost} tokens per attempt to receive a Michael Jackson-themed sticker or wallpaper. Each item has a different rarity level.</div>
       <div className="blind-box-container">
         {["sticker", "wallpaper"].map((type) => (
           <div key={type} className="blind-box-wrapper">

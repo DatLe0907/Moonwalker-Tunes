@@ -152,7 +152,7 @@ const songs = [
   { title: "People of the World", author: "Michael Jackson", album: "Unreleased", src: "https://www.youtube.com/embed/J2w2nDe0oF8?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Get Your Weight Off Of Me", author: "Michael Jackson", album: "Unreleased", src: "https://www.youtube.com/embed/BzbVE-KN6AM?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "I Was the Loser", author: "Michael Jackson", album: "Unreleased", src: "https://www.youtube.com/embed/mb06d4wdqvA?rel=0&controls=0&modestbranding=1&showinfo=0" },
-  { title: "Why", author: "Michael Jackson & 3T", album: "Brotherhood", src: "https://www.youtube.com/embed/86Hyjx5U8Ns?rel=0&controls=0&modestbranding=1&showinfo=0" },
+  { title: "Why", author: "Michael Jackson & 3T", album: "3T-Brotherhood", src: "https://www.youtube.com/embed/86Hyjx5U8Ns?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "Mind Is the Magic", author: "Michael Jackson", album: "Siegfried & Roy Soundtrack", src: "https://www.youtube.com/embed/ULUzP0h6h8g?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "On the Line", author: "Michael Jackson", album: "Unreleased", src: "https://www.youtube.com/embed/Wdgu6u18MfM?si=hLyVkx09zs2VPtOa?rel=0&controls=0&modestbranding=1&showinfo=0" },
   { title: "We Be Ballin'", author: "Michael Jackson", album: "Unreleased", src: "https://www.youtube.com/embed/FgJJom7fm_I?si=NacdBLp_ji7BjxTX?rel=0&controls=0&modestbranding=1&showinfo=0" },

@@ -1,3 +1,4 @@
+import "./normalize.css"
 import './App.css';
 import './assets/icon/Fontawesome.js'
 import { BrowserRouter, Route, Routes , Navigate} from "react-router-dom";

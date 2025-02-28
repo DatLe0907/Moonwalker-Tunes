@@ -28,7 +28,7 @@ export default function AutoImageSlider() {
       setTimeout(() => {
         setIndex((prev) => (prev + 1) % slider.length);
         setFade(true);
-      }, 500);
+      }, 0);
     }, 10000);
 
     return () => clearInterval(interval);

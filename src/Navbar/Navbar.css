@@ -29,7 +29,6 @@ nav a {
   padding: 10px;
   font-size: 1.5rem;
   font-weight: bold;
-  flex-wrap: wrap;
   position: relative;
 }
 

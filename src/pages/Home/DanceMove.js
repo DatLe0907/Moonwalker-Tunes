@@ -21,10 +21,8 @@ export default function DanceMove() {
 
   return (
     <div className="dance-move">
-      <div className="dance-box">
-        <div className="title dance-title">
-          <h2>Dance Moves</h2>
-          <p>Select a dance move</p>
+        <div className="dance-box">
+          <h2 className = "dance-title title">Iconic dance</h2>
         </div>
         <div
           className="dance-display"
@@ -46,6 +44,5 @@ export default function DanceMove() {
           ))}
         </div>
       </div>
-    </div>
   );
 }
