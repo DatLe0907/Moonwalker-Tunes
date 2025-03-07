@@ -18,7 +18,7 @@ const slider = [
 
 
 export default function AutoImageSlider() {
-  const [index, setIndex] = useState(1);
+  const [index, setIndex] = useState(0); // Bắt đầu từ 0
   const [fade, setFade] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function AutoImageSlider() {
       setTimeout(() => {
         setIndex((prev) => (prev + 1) % slider.length);
         setFade(true);
-      }, 0);
+      }, 300); // Delay để fade-out trước khi đổi ảnh
     }, 10000);
 
     return () => clearInterval(interval);
@@ -36,11 +36,14 @@ export default function AutoImageSlider() {
 
   return (
     <div className="slider">
-      <div className="slider-img" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assets/photo/wallpaper/wallpaper${index}.jpg)` }}></div>
+      <div className="slider-img" 
+        style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/assets/photo/wallpaper/wallpaper${index + 1}.jpg)` }}>
+      </div>
       <div className={`slider-text ${fade ? "fade-in" : "fade-out"}`}>
         <p>{slider[index].text}</p>
-        <span>~Michael Jackson</span>
+        <span>~Michael Jackson~</span>
       </div>
     </div>
   );
 }
+
