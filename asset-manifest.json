@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/Moonwalker-Tunes/static/css/main.24958be3.css",
+    "main.js": "/Moonwalker-Tunes/static/js/main.6453e473.js",
+    "static/js/453.a3c7e291.chunk.js": "/Moonwalker-Tunes/static/js/453.a3c7e291.chunk.js",
+    "static/media/kick.gif": "/Moonwalker-Tunes/static/media/kick.3e15338ed9d88a99701f.gif",
+    "static/media/antigravity-lean.gif": "/Moonwalker-Tunes/static/media/antigravity-lean.6077ddfc95c362f7517c.gif",
+    "static/media/moonwalk.gif": "/Moonwalker-Tunes/static/media/moonwalk.46564179b150c3691276.gif",
+    "static/media/side-walk.gif": "/Moonwalker-Tunes/static/media/side-walk.c33081a8872b35866afd.gif",
+    "static/media/spin.gif": "/Moonwalker-Tunes/static/media/spin.342959a3c104617afdce.gif",
+    "static/media/circle-slide.gif": "/Moonwalker-Tunes/static/media/circle-slide.5bb255b10899522e919c.gif",
+    "static/media/shuffle.gif": "/Moonwalker-Tunes/static/media/shuffle.c0dd4ec8ea326aefb231.gif",
+    "static/media/toe-stand.gif": "/Moonwalker-Tunes/static/media/toe-stand.adc010616e85286cd08b.gif",
+    "static/media/crotch-cb.gif": "/Moonwalker-Tunes/static/media/crotch-cb.78edabe526659599f5a4.gif",
+    "static/media/mj-info.jpg": "/Moonwalker-Tunes/static/media/mj-info.9adb68f851a0c015129f.jpg",
+    "static/media/mj-global-heat-map.png": "/Moonwalker-Tunes/static/media/mj-global-heat-map.b93a69ff4ec71a807bc8.png",
+    "static/media/background.jpg": "/Moonwalker-Tunes/static/media/background.e68c54963d6a31d1fcd5.jpg",
+    "index.html": "/Moonwalker-Tunes/index.html",
+    "main.24958be3.css.map": "/Moonwalker-Tunes/static/css/main.24958be3.css.map",
+    "main.6453e473.js.map": "/Moonwalker-Tunes/static/js/main.6453e473.js.map",
+    "453.a3c7e291.chunk.js.map": "/Moonwalker-Tunes/static/js/453.a3c7e291.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.24958be3.css",
+    "static/js/main.6453e473.js"
+  ]
+}
