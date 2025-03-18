@@ -1,0 +1,261 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap");
+:root{
+  --video-width: calc(100%/4 - 20px);
+}
+.music-card {
+  width: var(--video-width);
+  height: calc(var(--video-width)* 9 / 16 + 20px);
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease-in-out;
+  max-width: 500px; /* Giới hạn max để tránh quá rộng trên tablet */
+  background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  min-height: 300px;
+}
+
+.music-card:hover{
+  transform: scale(1.05);
+}
+
+.music-video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: black; /* Để tránh nền trắng khi video chưa tải */
+}
+
+.music-video-wrapper iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.music-card .music-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+.thumbnail {
+  position: relative;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.thumbnail:hover img {
+  transform: scale(1.05);
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 215, 0, 0.9);
+  color: black;
+  border: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.2s;
+  box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.play-button:hover {
+  background: rgba(255, 215, 0, 1);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Skeleton hiệu ứng load */
+.skeleton {
+  width: 100%;
+  height: calc(var(--video-width)* 9 / 16 + 20px);
+  background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 12px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Thông tin bài hát */
+.song-info {
+  margin-top: 12px;
+}
+
+.song-title {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  margin: 8px 0;
+}
+
+.song-album{
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #ffd700;
+  opacity: 0.8;
+}
+
+
+/* Vùng chứa video */
+.music-player {
+  width: 100%;
+}
+
+.music-video {
+  width: 100%;
+  height: 200px;
+}
+
+/* Điều khiển phát nhạc */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* Progress bar */
+.progress-container {
+  flex-grow: 1;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.progress-slider {
+  width: 100%;
+  height: 3px;
+  border-radius: 5px;
+  appearance: none;
+  background: #444;
+  outline: none;
+  transition: height 0.2s ease-in-out;
+}
+
+.progress-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 3px;
+  border-radius: 5px;
+  background: linear-gradient(to right, #ffd700 var(--progress, 0%), #444 var(--progress, 0%));
+}
+
+.progress-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffd700;
+  cursor: pointer;
+  opacity: 0;
+  transition: transform 0.2s, opacity 0.2s;
+  margin-top: -4px;
+}
+
+.progress-container:hover .progress-slider {
+  height: 6px;
+}
+
+.progress-container:hover .progress-slider::-webkit-slider-thumb {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Nút replay */
+.replay-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #555;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  margin-left: 10px;
+}
+
+.replay-button.active {
+  color: #ffd700;
+}
+
+.replay-button:hover {
+  opacity: 0.4;
+}
+
+@keyframes pulseEffect {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.music-card.highlight {
+  animation: pulseEffect 0.8s ease-in-out;
+  border: 2px solid #ffd700; /* Màu vàng nổi bật */
+  box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.7);
+}
+
+
+
+/* Tablet */
+@media (max-width: 1300px) {
+  .music-card {
+    margin: 15px 0;
+    width: calc(100%/2 - 40px);
+    padding: 10px;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 767px) {
+  .music-card {
+    margin: 15px 0;
+    width: 95%;
+    max-width: 380px;
+    padding: 10px;
+  }
+}

@@ -1,0 +1,39 @@
+/* Break point */
+
+/* Pc */
+@media (min-width: 64em) {
+}
+
+/* Tablet */
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+}
+
+/* Mobile */
+@media (max-width: 46.1875em) {
+  .Info .Info-box {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .Info .Info-box  .img {
+    /* width: 100%; */
+    width: 60vw;
+    height: 300px;
+  }
+
+  .Info .Info-content {
+    text-align: center;
+    max-width: 90%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+  }
+
+
+  .mj-popular {
+    width: 100%;
+    max-width: 320px;
+  }
+}

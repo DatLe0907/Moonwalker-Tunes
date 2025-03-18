@@ -1,0 +1,125 @@
+.dance-move {
+  background-color: #000;
+  color: white;
+  padding: 20px;
+}
+
+/* .dance-box {
+} */
+
+.dance-move .dance-box .dance-title {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  text-transform: capitalize;
+}
+
+.dance-title h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.dance-move .dance-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  height: 400px;
+  background-color: black;
+  margin: 20px auto;
+  font-size: 2rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: background 0.2s ease-in;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.dance-move .dance-animation {
+  content: "";
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 0;
+  
+}
+
+
+.dance-move .button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dance-move .button {
+  padding: 10px;
+  background: #555;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  transition: background 0.3s ease-in-out;
+}
+
+.dance-move .button:hover {
+  background: #666;
+}
+
+.dance-move .button.active {
+  background-color: #ffd700;
+  color: #000;
+}
+
+.old-tv-screen {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 200px;
+  height: 150px;
+  position: relative;
+  margin: 0;
+  border: none;
+  -webkit-border-radius: 50% / 10%;
+  border-radius: 50% / 10%;
+  font: normal 100%/normal Arial, Helvetica, sans-serif;
+  color: white;
+  text-align: center;
+  text-indent: 0.1em;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: #fff;
+  border-top: 3px solid #CDCDCD;
+  border-bottom: 3px solid #CDCDCD;
+  
+ }
+
+.old-tv-screen::before {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  position: absolute;
+  content: "";
+  top: 10%;
+  right: -5%;
+  bottom: 10%;
+  left: -5%;
+  border-left: 3px solid #CDCDCD;
+  border-right: 3px solid #CDCDCD;
+  -webkit-border-radius: 5% / 50%;
+  border-radius: 5% / 50%;
+  font: normal 100%/normal Arial, Helvetica, sans-serif;
+  color: rgba(0,0,0,1);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  text-shadow: none;
+
+}
+
+

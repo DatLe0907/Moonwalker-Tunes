@@ -1,0 +1,106 @@
+.Music {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin-top: 60px;
+  font-size: 16px;
+  position: relative;
+  padding-bottom: 50px;
+  min-height: 80vh;
+}
+
+.Music .Music-heading {
+  font-family: "Oswald", sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.Music .Music-control{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    border-radius: 8px;
+}
+
+.Music .Music-box {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 20px;
+  border-radius: 12px;
+}
+
+.Music-pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  /* background: white; */
+  /* box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); */
+  list-style: none;
+  margin-top: 15px;
+}
+
+.Music-pagination li {
+  display: inline-block;
+}
+
+.Music-pagination li a {
+  text-decoration: none;
+  padding: 8px 12px;
+  background: #292929;
+  color: white;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.Music-pagination li a:hover {
+  background-color: #f3cf0d;
+}
+
+.Music-pagination .active a {
+  background-color: #f3cf0d;
+  color: black;
+  font-weight: bold;
+}
+
+.Music-pagination .disabled a {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.Music-pagination .disabled a:hover {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Tablet */
+@media (max-width: 1350px) {
+  .Music .Music-box {
+    /* display: block; */
+    justify-content: center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .Music .Music-box {
+    /* display: block; */
+    justify-content: center;
+    gap: 5px;
+    
+  }
+  .Music .Music-control{
+    flex-direction: column-reverse;
+  }
+}

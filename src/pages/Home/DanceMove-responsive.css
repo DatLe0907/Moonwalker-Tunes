@@ -1,0 +1,11 @@
+/* Tablet */
+@media (max-width: 1023px) {
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .dance-move .dance-display {
+    width: 70vw;
+    height: 30vh;
+  }
+}

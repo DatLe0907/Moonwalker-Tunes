@@ -1,0 +1,81 @@
+/* Slider */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@600&family=Great+Vibes&family=Caveat:wght@600&family=Merriweather:wght@400;700&display=swap");
+.slider {
+  padding-top: 60px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slider .slider-img {
+  width: 100%;
+  position: relative;
+  height: 90vh;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.5s ease-in-out;
+  image-rendering: crisp-edges;
+  filter: contrast(120%) brightness(105%);
+}
+
+.slider .slider-text {
+  position: absolute;
+  bottom: 5vh;
+  color: #fff;
+  text-shadow: 
+    -1px -1px 1px black, 
+     1px -1px 1px black, 
+    -1px  1px 1px black, 
+     1px  1px 1px black;
+  text-align: center;
+  width: 90%;
+  font-size: 16px;
+}
+
+.slider-text p {
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+}
+
+.slider-text span {
+  display: block;
+  font-family: "Great Vibes", cursive;
+  font-style: italic;
+  font-size: 1.5rem;
+  margin-top: 8px;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.fade-out {
+  opacity: 1;
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}

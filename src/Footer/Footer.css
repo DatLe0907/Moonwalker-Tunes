@@ -1,0 +1,63 @@
+.footer {
+  background-color: #000;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+}
+
+.footer .footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer .footer-container .footer-text {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.footer .footer-container .footer-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-icons .footer-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-decoration: none;
+  font-weight: bold;
+  /* color: white; */
+  transition: background-color 0.3s ease;
+  background-color: #fff;
+  font-size: 18px;
+}
+
+.footer-link svg {
+  width: 60%; /* Điều chỉnh icon vừa khít với box */
+  height: 60%;
+}
+
+.footer-icons .footer-link:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.footer-link.facebook {
+  color: #3b5998;
+}
+
+.footer-link.youtube {
+  color: #ff0000;
+}
+
+.footer-link.spotify {
+  color: #1db954;
+}

@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins:wght@500&family=Oswald:wght@500&family=Playfair+Display:wght@600&family=Bebas+Neue&display=swap");
+
+nav {
+  font-family: "Playfair Display", sans-serif;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  background-color: black;
+
+  color: #fff;
+}
+
+nav a {
+  color: #fff;  
+  text-decoration: none;
+}
+
+#title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: relative;
+}
+
+/* Căn chỉnh phần tên */
+#title h1 {
+  gap: 0.2em;
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Điểm số */
+#title .points {
+  font-size: 1rem;
+  font-weight: bold;
+  background: gold;
+  color: black;
+  padding: 0.2em 0.6em;
+  border-radius: 5px;
+  margin-left: 1em;
+  min-width: 60px; /* Giữ kích thước ổn định */
+  text-align: center;
+  min-width: 40px; /* Đảm bảo không bị nhảy khi đổi số */
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Căn chỉnh icon vương miện */
+#title i {
+  margin: 0 0.3em;
+  font-size: 1.4em;
+  color: gold;
+}
+
+
+.menu {
+  display: flex;
+}
+
+.menu-bar {
+  display: none;
+  font-size: 16px;
+}
+
+.menu > div {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu > div > a {
+  width: 100%;
+  padding: 0 25px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.menu > div:hover a {
+  color: #929d9f;
+  cursor: pointer;
+}

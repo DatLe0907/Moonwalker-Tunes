@@ -1,0 +1,30 @@
+@media (max-width: 768px) {
+    .word-display .letter {
+      font-size: 1.6rem;
+      /* width: 35px; */
+    }
+  
+  
+    .keyboard button {
+      font-size: 1.1rem;
+      padding: 6px;
+    }
+  
+    .modal__content {
+      width: 90%;
+    }
+  
+    .modal__content h4 {
+      font-size: 1.6rem;
+    }
+  
+    .modal__content p {
+      font-size: 1.1rem;
+    }
+  
+    .start-game, .exit-game {
+      padding: 12px;
+      font-size: 1rem;
+    }
+  }
+  
