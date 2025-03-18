@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./Game.css";
 
 import GuessWord from "./GuessWord/GuessWord";
-// import SnakeGame from "./SnakeGame/SnakeGame";
+import SnakeGame from "./SnakeGame/SnakeGame";
 import MoonwalkRunner from "./MoonwalkRunner/MoonwalkRunner";
 import MJTheExperience from "./MJTheExperience/MJTheExperience"
 
@@ -15,14 +15,14 @@ const games = [
     image: `${process.env.PUBLIC_URL}/assets/photo/game/guess-word/guessword.webp`,
     component: GuessWord,
   },
-  // {
-  //   id: "game2",
-  //   title: "Snake Game",
-  //   description: "Control the snake, collect musical notes to score points, and avoid collisions with yourself and the borders.",
-  //   tokenRewards: true,
-  //   image: `${process.env.PUBLIC_URL}/assets/photo/game/snake/snake.webp`,
-  //   component: SnakeGame,
-  // },
+  {
+    id: "game2",
+    title: "Snake Game",
+    description: "Control the snake, collect musical notes to score points, and avoid collisions with yourself and the borders.",
+    tokenRewards: true,
+    image: `${process.env.PUBLIC_URL}/assets/photo/game/snake/snake.webp`,
+    component: SnakeGame,
+  },
   {
     id: "game3",
     title: "Moonwalk Runner",
