@@ -20,7 +20,7 @@ export default function TriviaChallenge() {
   return (
     <iframe
       style={{ width: "100%", height: "100%" }}
-      src={`${process.env.PUBLIC_URL}/assets/game/snake/index.html`}
+      src={`${process.env.PUBLIC_URL}/assets/game/neon-snake/index.html`}
       frameBorder="0"
       title="Snake Game"
     ></iframe>

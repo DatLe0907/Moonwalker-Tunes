@@ -1,0 +1,3 @@
+[submodule "public/assets/game/neon-snake"]
+	path = public/assets/game/neon-snake
+	url = https://github.com/DatLe0907/neon-snake.git
