@@ -6,7 +6,7 @@ const AlbumFilter = ({ selectedAlbum, setSelectedAlbum, setCurrentPage, songs, o
     const albumCount = new Map();
 
     songs.forEach((song) => {
-      song.album.split(",").forEach((a) => {
+      song.album.split("|").forEach((a) => {
         const album = a.trim();
         albumCount.set(album, (albumCount.get(album) || 0) + 1);
       });

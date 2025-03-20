@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import "./MusicPlayer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 
-export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighlighted, key, ref }) {
+export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighlighted }) {
   const playerRef = useRef(null);
   const [player, setPlayer] = useState(null);
   const [progress, setProgress] = useState(0);
@@ -13,41 +13,27 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighligh
 
   const getYouTubeId = (url) => url.match(/embed\/([a-zA-Z0-9_-]+)/)?.[1] || null;
 
-  
   useEffect(() => {
     if (!isPlaying) return;
 
     if (!window.YT) {
       const script = document.createElement("script");
       script.src = "https://www.youtube.com/iframe_api";
-      script.onload = () => {
-        if (window.YT) loadVideo();
-      };
+      script.onload = () => window.YT && loadVideo();
       document.body.appendChild(script);
     } else {
       loadVideo();
     }
   }, [isPlaying, isReplay]);
 
-  useEffect(() => {
-    const resumePlayback = () => {
-      if (player && isPlaying) {
-        player.playVideo();
-      }
-    };
-  
-    document.addEventListener("resumeMusic", resumePlayback);
-    return () => document.removeEventListener("resumeMusic", resumePlayback);
-  }, [player, isPlaying]);
-  
-  const loadVideo = () => {
+  const loadVideo = useCallback(() => {
     const videoId = getYouTubeId(song.src);
     if (!videoId || !playerRef.current) return;
-
+  
     if (player) {
       player.destroy();
     }
-
+  
     const newPlayer = new window.YT.Player(playerRef.current, {
       videoId,
       playerVars: {
@@ -63,32 +49,34 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighligh
       events: {
         onReady: (event) => {
           setPlayer(event.target);
-          const duration = event.target.getDuration();
-          setVideoDuration(duration > 0 ? duration : 240);
+          setVideoDuration(event.target.getDuration() || 240);
           event.target.playVideo();
         },
         onStateChange: (event) => {
-          if (event.data === window.YT.PlayerState.ENDED && isReplay) {
-            event.target.seekTo(0);
+          if (event.data === window.YT.PlayerState.ENDED) {
+            isReplay ? event.target.seekTo(0) : onEnd();
             event.target.playVideo();
-          } else if (event.data === window.YT.PlayerState.ENDED) {
-            onEnd();
           }
         },
       },
     });
-  };
+  
+    setPlayer(newPlayer);
+  }, [song.src, playerRef, player, isReplay, onEnd]); 
 
   useEffect(() => {
     if (!player) return;
-    const interval = setInterval(() => {
+    let animationFrame;
+    const updateProgress = () => {
       if (player.getCurrentTime) {
         const time = player.getCurrentTime();
         setCurrentTime(time);
         setProgress((time / videoDuration) * 100);
       }
-    }, 1000);
-    return () => clearInterval(interval);
+      animationFrame = requestAnimationFrame(updateProgress);
+    };
+    updateProgress();
+    return () => cancelAnimationFrame(animationFrame);
   }, [player, videoDuration]);
 
   useEffect(() => () => player?.destroy(), [player]);
@@ -103,22 +91,19 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighligh
       player.seekTo(currentTime, true);
     }
   };
-  
 
   const handleClickOnProgress = (e) => {
     if (!player) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const newTime = ((clientX - rect.left) / rect.width) * videoDuration;
-    
     setCurrentTime(newTime);
     setProgress((newTime / videoDuration) * 100);
     player.seekTo(newTime, true);
   };
-  
 
   return (
-    <div className={`music-card ${isHighlighted ? "highlight" : ""}`} key={key} ref={ref}>
+    <div className={`music-card ${isHighlighted ? "highlight" : ""}`}>
       {isPlaying ? (
         <>
           <div className="music-player">
@@ -158,7 +143,13 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighligh
       )}
       <div className="song-info">
         <h3 className="song-title">{song.title}</h3>
-        <p className="song-album">Album: {song.album}</p>
+        <p
+          className="song-album"
+          dangerouslySetInnerHTML={{
+            __html: `Album: ${song.album.replace(/\|/g, ' <strong style = "color: #fff">|</strong> ')}`,
+          }}
+        ></p>
+
       </div>
     </div>
   );
