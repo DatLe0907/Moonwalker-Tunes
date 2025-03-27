@@ -6,8 +6,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-x: hidden;
-  perspective: 20px;
   background-color: #000;
 }
 
@@ -18,19 +16,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transform-style: preserve-3d;
 
 }
 
-.Shop::-webkit-scrollbar {
-  display: none;
-}
 
 .bg {
   position: absolute;
   width: 100%;
   height: 100%;
-  transform: translateZ(-10px) scale(1.7);
   background-size: cover;
   background-position: center;
 }
@@ -41,49 +34,7 @@
   align-items: center;
   justify-content: center;
   color:#fff;
-  transform: translateZ(10px) scale(.5);
 }
-
-.planet1 {
-  position: absolute;
-  width: 320px;
-  top: 50%;
-  right: 20%;
-  transform: translateZ(11px)
-        translateX(-50px)
-    ;
-}
-
-.planet2 {
-  position: absolute;
-  width: 120px;
-  top: 10%;
-  right: 10%;
-  transform: translateZ(5px)
-        translateX(-50px)
-    ;
-}
-
-.blind-box, .bg, .planet1, .planet2 {
-  will-change: transform;
-}
-
-
-.static{
-  width: 100%;
-  height:100px;
-  background-image: linear-gradient(
-      to bottom,
-      transparent,
-      #000 50px
-  );
-  transform: translateY(20px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color:#fff;
-}
-
 
 
 .Shop-title {
@@ -97,6 +48,7 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   max-width: 600px;
+  z-index: 1;
 }
 
 .blind-box-container {

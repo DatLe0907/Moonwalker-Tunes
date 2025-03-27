@@ -1,0 +1,76 @@
+.ticket-dashboard {
+    text-align: center;
+    padding: 20px;
+    height: 100vh;
+    margin-top: 60px;
+  }
+  
+  .dashboard-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .no-tickets {
+    font-size: 18px;
+  }
+  
+  .ticket-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .ticket-item {
+    background: #222;
+    color: white;
+    padding: 15px;
+    margin: 10px auto;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .enter-btn {
+    background: #ff9800;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .enter-btn:hover {
+    background: #e68900;
+  }
+  
+  .concert-view {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .concert-title {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ff9800;
+    margin-bottom: 20px;
+  }
+  
+  .concert-video {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .back-btn {
+    background: rgba(255, 215, 0, 0.9);;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .back-btn:hover {
+    opacity: 0.8;
+  }
+
+  
+  

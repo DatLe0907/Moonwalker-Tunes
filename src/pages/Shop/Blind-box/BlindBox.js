@@ -139,7 +139,7 @@ const BlindBox = () => {
       backgroundRepeat: "no-repeat",}}></div>
 
         <div className="content">
-          <div className="Shop-content">Random blind box system where you can spend {cost} tokens per attempt to receive a Michael Jackson-themed sticker or wallpaper. Each item has a different rarity level.</div>
+          <div className="Shop-content">Spend {cost} tokens per attempt to receive a Michael Jackson-themed sticker or wallpaper.</div>
           <div className="blind-box-container">
             {["sticker", "wallpaper"].map((type) => (
               <div key={type} className="blind-box-wrapper">
@@ -171,11 +171,7 @@ const BlindBox = () => {
             ))}
           </div> 
         </div>
-
-        <img src={`${process.env.PUBLIC_URL}/assets/photo/shop/planet1.png`} class="planet1"></img>
-        <img src={`${process.env.PUBLIC_URL}/assets/photo/shop/planet2.png`} class="planet2"></img>
       </div>
-      <div className="static"></div>
     </div>
   );
 };

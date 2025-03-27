@@ -43,11 +43,19 @@ const games = [
 function Game() {
   const [selectedGame, setSelectedGame] = useState(null);
 
+  const startGame = (game) => {
+    setSelectedGame(game);
+  };
+
+  const closeGame = () => {
+    setSelectedGame(null);
+  };
+
   return (
     <div className="game-container">
       <div className="game-list">
         {games.map((game) => (
-          <div key={game.id} className="game-card" onClick={() => setSelectedGame(game)}>
+          <div key={game.id} className="game-card" onClick={() => startGame(game)}>
             <img src={game.image} alt={game.title} className="game-image" />
             <div className="game-info">
               <h2>{game.title}</h2>
@@ -62,8 +70,8 @@ function Game() {
       {selectedGame && (
         <div className="game-modal">
           <div className="game-modal-content">
-            <span className="close-button btn" onClick={() => setSelectedGame(null)}>&times;</span>
-            <selectedGame.component onClose={() => setSelectedGame(null)} autoStart={true} />
+            <span className="close-button btn" onClick={closeGame}>&times;</span>
+            <selectedGame.component onClose={closeGame} autoStart={true} />
           </div>
         </div>
       )}
