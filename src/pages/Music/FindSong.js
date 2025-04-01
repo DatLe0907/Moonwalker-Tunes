@@ -1,44 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "./FindSong.css";
 
-const FindSong = ({ onSearch, songs, scrollToSong, setSelectedAlbum, setCurrentPage, navigate }) => {
+const FindSong = ({ onSearch, songs, scrollToSong }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
-  const handleInputChange = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
-  
-    if (query === "") {
+  useEffect(() => {
+    if (!searchQuery.trim()) {
       setSuggestions([]);
-    } else {
-      const filteredSongs = songs.filter((song) => {
-        const words = song.title.toLowerCase().split(" ");
-        const firstLetters = words.map(word => word.charAt(0)).join("");
-
-        return (
-          song.title.toLowerCase().startsWith(query) ||
-          firstLetters.startsWith(query.replace(/\s+/g, ""))
-        );
-      });
-
-      setSuggestions(filteredSongs.slice(0, 5));
+      return;
     }
-  };
+
+    const query = searchQuery.toLowerCase();
+    const filteredSongs = songs.filter((song) =>
+      song.title.toLowerCase().includes(query)
+    );
+
+    setSuggestions(filteredSongs.slice(0, 10)); 
+  }, [searchQuery, songs]);
 
   const handleSearch = () => {
-    if (searchQuery.trim() === "") return;
+    if (!searchQuery.trim()) return;
     onSearch(searchQuery);
-    setSearchQuery("");
-    setSuggestions([]); // 🔥 Ẩn suggestions sau khi tìm kiếm
+    setSuggestions([]);
   };
 
   const handleSuggestionClick = (title) => {
-    setSearchQuery("");
+    setSearchQuery(title);
     setSuggestions([]);
     onSearch(title);
+    scrollToSong(title); 
   };
 
   const handleKeyDown = (event) => {
@@ -54,7 +47,7 @@ const FindSong = ({ onSearch, songs, scrollToSong, setSelectedAlbum, setCurrentP
         type="text"
         placeholder="Search for a song..."
         value={searchQuery}
-        onChange={handleInputChange}
+        onChange={(e) => setSearchQuery(e.target.value)}
         onKeyDown={handleKeyDown}
         className="search-input"
       />

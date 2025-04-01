@@ -1,61 +1,80 @@
-import { useState, useEffect, useCallback, useMemo } from "react";
+import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { useGame } from "../../context/PointsContext";
+import { useToast } from "../../context/ToastContext";
 import "./GuessWord.css";
 import "./GuessWord-responsive.css";
 import confetti from "canvas-confetti";
 
 
+
 export default function GuessWord({ onClose, autoStart }) {
   const wordList = useMemo(() => [
-      { word: "Thriller", hint: "Best-selling album of all time" },
-      { word: "Moonwalk", hint: "Signature dance move" },
-      { word: "Beat It", hint: "Hit song with a famous guitar solo" },
-      { word: "Neverland", hint: "Michael Jackson's ranch name" },
-      { word: "Glove", hint: "Iconic fashion accessory" },
-      { word: "Bad", hint: "1987 album with hit songs like 'Smooth Criminal'" },
-      { word: "Dangerous", hint: "1991 album featuring 'Black or White'" },
-      { word: "Billie Jean", hint: "Hit song about a girl claiming he’s the father of her son" },
-      { word: "Off The Wall", hint: "Album released before 'Thriller'" },
-      { word: "This Is It", hint: "Final concert tour that was never completed" },
-      { word: "MJ", hint: "His initials" },
-      { word: "Heal The World", hint: "Song promoting global peace" },
-      { word: "Black Or White", hint: "Song about racial harmony" },
-      { word: "We Are The World", hint: "Charity song co-written with Lionel Richie" },
-      { word: "HIStory", hint: "1995 double album with past hits and new songs" },
-      { word: "Ghosts", hint: "1996 short film featuring Michael as multiple characters" },
-      { word: "Smooth Criminal", hint: "Song featuring the iconic anti-gravity lean" },
-      { word: "MJ One", hint: "Cirque du Soleil show inspired by his music" },
-      { word: "Thriller Dance", hint: "Famous dance routine from the 'Thriller' video" },
-      { word: "King Of Pop", hint: "His famous nickname" },
-      { word: "Jackson Five", hint: "Group he started in with his brothers" },
-      { word: "ABC", hint: "Jackson 5 song about learning the basics" },
-      { word: "Ben", hint: "Early solo song about a pet rat" },
-      { word: "Invincible", hint: "Last studio album released in 2001" },
-      { word: "Jam", hint: "Song featuring Michael Jordan in the music video" },
-      { word: "Earth Song", hint: "Song about environmental issues" },
-      { word: "Dangerous Tour", hint: "Tour that was cut short due to health issues" },
-      { word: "Morphine", hint: "Song discussing painkiller addiction" },
-      { word: "Michael", hint: "His first name" },
-      { word: "Jackson", hint: "His last name" },
-      { word: "Sony", hint: "Music label he was associated with" },
-      { word: "Joseph", hint: "His father’s first name" },
-      { word: "Janet", hint: "His famous sister" },
-      { word: "Lisa Marie", hint: "First name of his first wife" },
-      { word: "Prince", hint: "First name of his eldest son" },
-      { word: "Paris", hint: "First name of his daughter" },
-      { word: "Blanket", hint: "Nickname of his youngest son" },
-      { word: "Man In The Mirror", hint: "Song about self-reflection and change" },
-      { word: "You Are Not Alone", hint: "Song written by R. Kelly" },
-      { word: "One Glove", hint: "His unique stage fashion choice" },
-      { word: "Spike Lee", hint: "Director of 'They Don’t Care About Us' video" },
-      { word: "Hollywood Walk", hint: "He has a star on this Walk of Fame" },
-      { word: "Motown", hint: "Record label where he started his career" },
-      { word: "Guitar", hint: "Eddie Van Halen played this instrument in 'Beat It'" },
-      { word: "Pepsi", hint: "Brand involved in his famous commercial accident" },
-      { word: "Grammy", hint: "Award he won multiple times" },
-      { word: "MJ The Musical", hint: "Broadway show based on his life" }
+    { hint: "What is the best-selling album of all time by Michael Jackson?", word: "Thriller" },
+    { hint: "What is Michael Jackson's signature dance move called?", word: "Moonwalk" },
+    { hint: "Which Michael Jackson song features a famous guitar solo by Eddie Van Halen?", word: "Beat It" },
+    { hint: "What is the name of Michael Jackson's famous ranch?", word: "Neverland Ranch" },
+    { hint: "What iconic fashion accessory is Michael Jackson known for wearing on stage?", word: "Glove" },
+    { hint: "Which 1987 album includes hits like 'Smooth Criminal' and 'Man in the Mirror'?", word: "Bad" },
+    { hint: "Which 1991 album features the song 'Black or White'?", word: "Dangerous" },
+    { hint: "Which hit song tells the story of a girl claiming Michael Jackson is the father of her child?", word: "Billie Jean" },
+    { hint: "What is the name of the album Michael Jackson released before 'Thriller'?", word: "Off The Wall" },
+    { hint: "What is Michael Jackson's famous nickname?", word: "King Pop" },
+    { hint: "Which Michael Jackson song promotes global peace and unity?", word: "Heal The World" },
+    { hint: "Which song by Michael Jackson addresses racial harmony?", word: "Black White" },
+    { hint: "What is the name of the charity song co-written by Michael Jackson and Lionel Richie?", word: "We Are The World" },
+    { hint: "What is the name of Michael Jackson's 1995 double album featuring past hits and new songs?", word: "HIStory" },
+    { hint: "Which song features Michael Jackson's iconic anti-gravity lean?", word: "Smooth Criminal" },
+    { hint: "What is the name of the Cirque du Soleil show inspired by Michael Jackson's music?", word: "MJ The One" },
+    { hint: "Which famous dance routine is featured in the 'Thriller' music video?", word: "Thriller Dance" },
+    { hint: "What was the name of Michael Jackson's family group?", word: "Jackson Five" },
+    { hint: "Which Jackson 5 song teaches the basics of learning?", word: "ABC Song" },
+    { hint: "What is the name of Michael Jackson's early solo hit about a pet rat?", word: "Ben" },
+    { hint: "What is the name of Michael Jackson's final studio album released in 2001?", word: "Invincible" },
+    { hint: "Which Michael Jackson song features basketball legend Michael Jordan in the music video?", word: "Jam" },
+    { hint: "Which Michael Jackson song addresses environmental issues?", word: "Earth Song" },
+    { hint: "Which Michael Jackson tour was cut short due to health issues?", word: "Dangerous Tour" },
+    { hint: "Which Michael Jackson song discusses painkiller addiction?", word: "Morphine Song" },
+    { hint: "What is Michael Jackson's first name?", word: "Michael" },
+    { hint: "What is Michael Jackson's last name?", word: "Jackson" },
+    { hint: "Which record label was Michael Jackson associated with during his career?", word: "Sony Music" },
+    { hint: "What is the name of Michael Jackson's father?", word: "Joseph" },
+    { hint: "What is the name of Michael Jackson's famous sister?", word: "Janet Jackson" },
+    { hint: "What is thet name of Michael Jackson's first wife?", word: "Lisa Marie" },
+    { hint: "What is the name of Michael Jackson's eldest son?", word: "Prince Jackson" },
+    { hint: "What is the name of Michael Jackson's daughter?", word: "Paris Jackson" },
+    { hint: "What is the nickname of Michael Jackson's youngest son?", word: "Blanket" },
+    { hint: "Which Michael Jackson song is about self-reflection and social change?", word: "Man In The Mirror" },
+    { hint: "Which song written by R. Kelly was performed by Michael Jackson?", word: "You Are Not Alone" },
+    { hint: "What is the name of Michael Jackson's iconic style?", word: "Single Glove" },
+    { hint: "Who directed Michael Jackson's 'They Don’t Care About Us' music video?", word: "Spike Lee" },
+    { hint: "Where does Michael Jackson have a star on the Walk of Fame?", word: "Hollywood Walk" },
+    { hint: "Which record label did Michael Jackson start his career with?", word: "Motown" },
+    { hint: "Who played the guitar solo in Michael Jackson's 'Beat It'?", word: "Van Halen" },
+    { hint: "Which brand was involved in Michael Jackson's famous commercial accident?", word: "Pepsi Accident" },
+    { hint: "What major music award did Michael Jackson win multiple times?", word: "Grammy Award" },
+    { hint: "What is the name of the Broadway show based on Michael Jackson's life?", word: "MJ Musical" },
+    { hint: "What is the title of the TV miniseries about the Jackson family?", word: "American Dream" },
+    { hint: "What is the name of the movie where Michael Jackson starred as the Scarecrow?", word: "The Wiz" },
+    { hint: "Which duet song did Michael Jackson perform with his sister Janet?", word: "Scream" },
+    { hint: "What is the name of Michael Jackson's famous pet chimpanzee?", word: "Bubbles Chimp" },
+    { hint: "What is the name of the 1984 tour Michael Jackson performed with his brothers?", word: "Victory" },
+    { hint: "What is the name of the 1988 movie featuring Michael Jackson's music videos and short films?", word: "Moonwalker Film" },
+    { hint: "What is the name of Michael Jackson's short film released in 1996?", word: "Ghosts Film" },
+    { hint: "Who was one of Michael Jackson's choreographers?", word: "Wade Robson" },
+    { hint: "What is the name of Michael Jackson's live TV special celebrating Motown?", word: "Motown Special" },
+    { hint: "What genre of music is Michael Jackson most associated with?", word: "Pop Music" },
+    { hint: "Which Michael Jackson music video revolutionized the industry?", word: "Thriller Video" },
+    { hint: "What is Michael Jackson's famous exclamation during performances?", word: "Hee Hee" },
+    { hint: "What is the name of the Smooth Criminal dance?", word: "Anti Gravity" }
   ], []);
+
+
+  
+
+
+
   const { addPoints } = useGame();
+  const { addToast } = useToast();
   const [gameStarted, setGameStarted] = useState(false);
   const [currentWord, setCurrentWord] = useState("");
   const [hint, setHint] = useState("");
@@ -65,6 +84,9 @@ export default function GuessWord({ onClose, autoStart }) {
   const [showWin, setShowWin] = useState(false);
   const [showExitConfirm, setShowExitConfirm] = useState(false);
   const [maxWrongGuesses, setMaxWrongGuesses] = useState(6);
+
+  const winRef = useRef(false);  // Track if the win has already been handled
+  const gameOverRef = useRef(false);  // Track if game over has been handled
 
   const startGame = useCallback(() => {
     const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
@@ -76,6 +98,10 @@ export default function GuessWord({ onClose, autoStart }) {
     setShowGameOver(false);
     setShowWin(false);
     setGameStarted(true);
+
+    // Reset refs
+    winRef.current = false;
+    gameOverRef.current = false;
   }, [wordList]);
 
   const exitGame = useCallback(() => {
@@ -90,10 +116,8 @@ export default function GuessWord({ onClose, autoStart }) {
   }, []);
 
   useEffect(() => {
-    if (autoStart) {
-      startGame();
-    }
-  }, [autoStart, startGame]);
+    startGame(); // Tự động bắt đầu trò chơi khi component được render
+  }, [startGame]);
 
   const handleGuess = useCallback(
     (letter) => {
@@ -109,15 +133,18 @@ export default function GuessWord({ onClose, autoStart }) {
             .filter((char) => char !== " ")
             .every((char) => newGuessedLetters.includes(char));
 
-          if (allLettersGuessed) {
+          if (allLettersGuessed && !winRef.current) {  // Check if win is already handled
+            winRef.current = true;  // Mark win as handled
             setShowWin(true);
-            addPoints(3);
+            addPoints(10);
+            addToast("You guessed the word! +10 tokens", "success");
             setGameStarted(false);
-            confetti({ particleCount: 150, spread: 70, origin: { y: 1 } });
+            confetti({ particleCount: 150, spread: 70, origin: { y: 1, z: 9999999 } });
           }
         } else {
           setWrongGuesses((prev) => {
-            if (prev + 1 >= maxWrongGuesses) {
+            if (prev + 1 >= maxWrongGuesses && !gameOverRef.current) {  // Check if game over is already handled
+              gameOverRef.current = true;  // Mark game over as handled
               setShowGameOver(true);
               setGameStarted(false);
             }
@@ -128,7 +155,7 @@ export default function GuessWord({ onClose, autoStart }) {
         return newGuessedLetters;
       });
     },
-    [gameStarted, currentWord, addPoints, maxWrongGuesses]
+    [gameStarted, currentWord, addPoints, maxWrongGuesses, guessedLetters, addToast]
   );
 
   useEffect(() => {
@@ -148,7 +175,7 @@ export default function GuessWord({ onClose, autoStart }) {
   }, [gameStarted, handleGuess]);
 
   const renderModal = () => {
-    if (!showGameOver && !showWin && !showExitConfirm) return null;
+    if (!(showGameOver || showWin || showExitConfirm)) return null;
 
     return (
       <div className="game__modal show">
@@ -172,7 +199,7 @@ export default function GuessWord({ onClose, autoStart }) {
             ) : (
               <>
                 <button className="btn mj-button" onClick={startGame}>
-                  {showGameOver ? "Try Again" : "Next Question"}
+                  {showGameOver ? "Try Again" : "Next hint"}
                 </button>
               </>
             )}
@@ -184,36 +211,32 @@ export default function GuessWord({ onClose, autoStart }) {
 
   return (
     <div className="guess-word">
-      {!gameStarted ? (
-        <button className="start-game mj-button" onClick={startGame}>Play</button>
-      ) : (
-        <div className="game__box mj-container">
-          <h4 className="game-hint">Hint: <b>{hint}</b></h4>
-          <ul className="word-display">
-            {currentWord.split("").map((char, index) => {
-              const lowerChar = char.toLowerCase();
-              return (
-                <li key={index} className={`letter ${char === " " ? "space" : guessedLetters.includes(lowerChar) ? "guessed" : ""}`}>
-                  {char === " " ? " " : guessedLetters.includes(lowerChar) ? char : <span>&nbsp;</span>}
-                </li>
-              );
-            })}
-          </ul>
-          <h4 className="guesses-text">Wrong Guesses: <b>{wrongGuesses}/{maxWrongGuesses}</b></h4>
-          <div className="keyboard">
-            {"abcdefghijklmnopqrstuvwxyz".split("").map((letter) => (
-              <button
-                key={letter}
-                className="btn mj-button"
-                onClick={() => handleGuess(letter)}
-                disabled={guessedLetters.includes(letter)}
-              >
-                {letter}
-              </button>
-            ))}
-          </div>
+      <div className="game__box mj-container">
+        <h4 className="game-hint">Hint: <b>{hint}</b></h4>
+        <ul className="word-display">
+          {currentWord.split("").map((char, index) => {
+            const lowerChar = char.toLowerCase();
+            return (
+              <li key={index} className={`letter ${char === " " ? "space" : guessedLetters.includes(lowerChar) ? "guessed" : ""}`}>
+                {char === " " ? " " : guessedLetters.includes(lowerChar) ? char : <span>&nbsp;</span>}
+              </li>
+            );
+          })}
+        </ul>
+        <h4 className="guesses-text">Wrong Guesses: <b>{wrongGuesses}/{maxWrongGuesses}</b></h4>
+        <div className="keyboard">
+          {"abcdefghijklmnopqrstuvwxyz".split("").map((letter) => (
+            <button
+              key={letter}
+              className="btn mj-button"
+              onClick={() => handleGuess(letter)}
+              disabled={guessedLetters.includes(letter)}
+            >
+              {letter}
+            </button>
+          ))}
         </div>
-      )}
+      </div>
       {renderModal()}
     </div>
   );

@@ -3,7 +3,7 @@
 nav {
   font-family: "Playfair Display", sans-serif;
   position: fixed;
-  z-index: 9999;
+  z-index: 999;
   top: 0;
   left: 0;
   right: 0;
@@ -81,6 +81,18 @@ nav a {
   align-items: center;
 }
 
+.menu > div.active{
+  background-color: #929d9f;
+}
+
+.menu > div.active a {
+  color: #000;
+}
+
+.menu > div.active:hover a {
+  color: #000;
+}
+
 .menu > div > a {
   width: 100%;
   padding: 0 25px;
@@ -89,6 +101,7 @@ nav a {
   align-items: center;
   height: 100%;
 }
+
 
 .menu > div:hover a {
   color: #929d9f;

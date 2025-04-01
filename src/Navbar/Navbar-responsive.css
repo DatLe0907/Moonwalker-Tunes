@@ -63,13 +63,15 @@
       padding: 10px;
       text-align: center;
     }
+
+    
   
     .menu > div a {
       color: black;
     }
   
     /* Hiển thị menu khi có class "active" */
-    .menu.active {
+    .menu.open {
       display: flex;
     }
   }

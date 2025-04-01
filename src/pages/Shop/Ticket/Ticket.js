@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useGame } from "../../context/PointsContext"; // Import hệ thống điểm
 import emailjs from "emailjs-com";
+import { useToast } from "../../context/ToastContext"; // Import useToast
 import "./Ticket.css";
 
 const TICKET_COST = 10; // Giá mỗi vé theo điểm
@@ -25,8 +26,7 @@ const places = [
   },
 ];
 
-
-const sendEmail = (userEmail, userName, ticketDetails) => {
+const sendEmail = (userEmail, userName, ticketDetails, addToast) => {
   const templateParams = {
     to_email: userEmail,
     user_name: userName,
@@ -36,13 +36,14 @@ const sendEmail = (userEmail, userName, ticketDetails) => {
   emailjs
     .send("service_53k4vm8", "template_6case9c", templateParams, "jqG_abfd3LpwlEKqT")
     .then((response) => {
-      console.log("✅ Email sent successfully!", response.status, response.text);
+      console.log("Email sent successfully!", response.status, response.text);
+      addToast("Email sent successfully!", "success");	
     })
     .catch((err) => {
-      console.error("❌ Failed to send email:", err);
+      console.error("Failed to send email:", err);
+      addToast("Failed to send email.", "error");
     });
 };
-
 
 const TourSection = () => {
   const { points, addPoints } = useGame(); // Lấy điểm từ context
@@ -52,6 +53,7 @@ const TourSection = () => {
   const [confirmation, setConfirmation] = useState(null);
   const [savedBookings, setSavedBookings] = useState([]);
 
+  const { addToast } = useToast(); // Lấy hàm addToast từ context
   useEffect(() => {
     const bookings = JSON.parse(localStorage.getItem("userBookings")) || [];
     setSavedBookings(bookings);
@@ -77,16 +79,23 @@ const TourSection = () => {
     const totalCost = formData.tickets * TICKET_COST;
   
     if (points < totalCost) {
-      alert("Not enough points to buy these tickets!");
+      addToast("Not enough points to buy these tickets!", "error");
       return;
     }
   
-    const newBooking = {
-      tickets: formData.tickets,
-      tour: selectedTour.name,
-    };
+    // Kiểm tra xem đã đặt vé cho tour này chưa
+    const existingBookingIndex = savedBookings.findIndex((b) => b.tour === selectedTour.name);
   
-    const updatedBookings = [...savedBookings, newBooking];
+    let updatedBookings = [...savedBookings];
+  
+    if (existingBookingIndex !== -1) {
+      // Nếu đã đặt vé trước đó, cộng dồn số vé mới
+      updatedBookings[existingBookingIndex].tickets += parseInt(formData.tickets, 10);
+    } else {
+      // Nếu chưa có, thêm mới
+      updatedBookings.push({ tickets: formData.tickets, tour: selectedTour.name });
+    }
+  
     setSavedBookings(updatedBookings);
     localStorage.setItem("userBookings", JSON.stringify(updatedBookings));
   
@@ -94,20 +103,23 @@ const TourSection = () => {
     addPoints(-totalCost);
   
     // Gửi email xác nhận vé
-    const ticketDetails = `Concert: ${selectedTour.name}\nTickets: ${formData.tickets}\nThank you for booking!`;
-    sendEmail(formData.email, formData.name, ticketDetails);
+    const ticketDetails = `Concert: ${selectedTour.name}\nTickets: ${formData.tickets}\nTotal tickets: ${
+      updatedBookings.find((b) => b.tour === selectedTour.name)?.tickets
+    }\nThank you for booking!`;
   
-    alert("✅ Booking successful! A confirmation email has been sent.");
+    sendEmail(formData.email, formData.name, ticketDetails, addToast);
   
-    setConfirmation(`Thank you, ${formData.name}! Your ${formData.tickets} ticket(s) for ${selectedTour.name} have been booked.`);
+    setConfirmation(`Thank you, ${formData.name}! You now have ${updatedBookings.find((b) => b.tour === selectedTour.name)?.tickets} ticket(s) for ${selectedTour.name}.`);
   };
-  
 
   return (
-    <div id = "ticket" className="tour tour-section row">
+    <div id="ticket" className="tour tour-section row">
+      
       <div className="content-section">
         <h2 className="section-heading white-text title">TOUR DATES</h2>
-        <p className="section-sub-heading white-text">Remember to book your tickets! (Your Points: {points})</p>
+        <p className="section-sub-heading white-text">
+          Remember to book your tickets! (Your Points: {points})
+        </p>
 
         <ul className="places-list">
           {places.map((place, index) => (
@@ -116,7 +128,9 @@ const TourSection = () => {
                 <h3 className="place-heading">{place.name}</h3>
                 <p className="place-time">{place.date}</p>
                 <p className="place-dcr">{place.description}</p>
-                <button className="btn js-buy-ticket" onClick={() => openModal(place)}>Buy Tickets</button>
+                <button className="btn js-buy-ticket pd14" onClick={() => openModal(place)}>
+                  Buy Tickets
+                </button>
               </div>
               <img src={place.image} alt={place.name} className="place-img" />
             </li>
@@ -126,26 +140,36 @@ const TourSection = () => {
         {modalOpen && (
           <div className="tour-modal">
             <div className="modal-content">
-              <button className="btn close-btn" onClick={closeModal}>&times;</button>
+              <button className="btn close-button" onClick={closeModal}>
+                &times;
+              </button>
               <h2 className="modal-heading">Buy Tickets for {selectedTour.name}</h2>
               {confirmation ? (
                 <p className="confirmation-message">{confirmation}</p>
               ) : (
                 <form onSubmit={handleSubmit} className="modal-form">
                   <div className="form-group">
-                    <label className="form-label" htmlFor="name">Name</label>
+                    <label className="form-label" htmlFor="name">
+                      Name
+                    </label>
                     <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
                   </div>
                   <div className="form-group">
-                    <label className="form-label" htmlFor="email">Email</label>
+                    <label className="form-label" htmlFor="email">
+                      Email
+                    </label>
                     <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
                   </div>
                   <div className="form-group">
-                    <label className="form-label" htmlFor="tickets">Tickets</label>
+                    <label className="form-label" htmlFor="tickets">
+                      Tickets
+                    </label>
                     <input type="number" id="tickets" name="tickets" value={formData.tickets} onChange={handleChange} required min="1" />
                   </div>
-                  <p>Each ticket costs {TICKET_COST} points. Your current points: {points}</p>
-                  <button type="submit" className="btn">Buy</button>
+                  <p>Each ticket costs {TICKET_COST} tokens. Your current tokens: {points}</p>
+                  <button type="submit" className="btn buy-btn">
+                    Buy
+                  </button>
                 </form>
               )}
             </div>

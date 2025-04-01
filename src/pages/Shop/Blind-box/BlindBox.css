@@ -119,20 +119,5 @@
   margin-bottom: 10px;
 }
 
-.btn {
-  display: block;
-  margin: 5px auto;
-  padding: 8px 15px;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  text-decoration: none;
-  font-weight: unset;
-}
 
-.btn:hover {
-  background-color: #444;
-}
+

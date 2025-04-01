@@ -3,9 +3,9 @@ import { useGame } from "../../context/PointsContext";
 import "./BlindBox.css";
 
 const rarityLevels = [
-  { name: "Common", color: "#fff", chance: 60 },  // 60%
-  { name: "Rare", color: "#D8DDD8", chance: 30 },    // 30%
-  { name: "Legendary", color: "#FCDCF1", chance: 10 }, // 10%
+    { name: "Common", color: "#fff", chance: 60 }, 
+    { name: "Rare", color: "#D8DDD8", chance: 30 },    
+    { name: "Legendary", color: "#FCDCF1", chance: 10 }
 ];
 
 const items = {

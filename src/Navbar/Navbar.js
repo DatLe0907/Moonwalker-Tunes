@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faCrown } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { useGame } from "../pages/context/PointsContext"; 
 import "./Navbar.css";
@@ -10,6 +10,7 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const { points } = useGame(); 
+  const location = useLocation(); // Lấy đường dẫn hiện tại
 
   // Xử lý đóng menu khi click ra ngoài
   useEffect(() => {
@@ -25,10 +26,14 @@ function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0); // Cuộn về đầu trang
+  }, [location.pathname]);
+
   return (
     <nav>
       <div id="title">
-      <Link to="/" className="logo">
+        <Link to="/" className="logo">
           <h1>
             <span>Moonwalker</span>
             <FontAwesomeIcon icon={faCrown} />
@@ -46,20 +51,20 @@ function Navbar() {
       </i>
 
       {/* Gán ref vào menu */}
-      <div ref={menuRef} className={`menu ${menuOpen ? "active" : ""}`} onClick={() => setMenuOpen(false)}>
-        <div className="home">
+      <div ref={menuRef} className={`menu ${menuOpen ? "open" : ""}`} onClick={() => setMenuOpen(false)}>
+        <div className={`home ${location.pathname === "/home" ? "active" : ""}`}>
           <Link to="/">Home</Link>
         </div>
-        <div className="information">
+        <div className={`music ${location.pathname === "/music" ? "active" : ""}`}>
           <Link to="/music">Music</Link>
         </div>
-        <div className="tour">
+        <div className={`tour ${location.pathname === "/tour" ? "active" : ""}`}>
           <Link to="/tour">Tour</Link>
         </div>
-        <div className="shop">
+        <div className={`shop ${location.pathname === "/shop" ? "active" : ""}`}>
           <Link to="/shop">Shop</Link>
         </div>
-        <div className="game">
+        <div className={`game ${location.pathname === "/game" ? "active" : ""}`}>
           <Link to="/game">Game</Link>
         </div>
       </div>

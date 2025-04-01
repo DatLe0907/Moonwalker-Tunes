@@ -6,6 +6,7 @@ import SnakeGame from "./SnakeGame/SnakeGame";
 import MoonwalkRunner from "./MoonwalkRunner/MoonwalkRunner";
 import MJTheExperience from "./MJTheExperience/MJTheExperience"
 
+
 const games = [
   {
     id: "game1",
@@ -26,7 +27,7 @@ const games = [
   {
     id: "game3",
     title: "Moonwalk Runner",
-    description: "Run, jump, and avoid obstacles in this exciting side-scrolling game inspired by Michael Jackson's moves.",
+    description: "Run, jump, and fight in this exciting game inspired by Michael Jackson's moves.",
     image: `${process.env.PUBLIC_URL}/assets/photo/game/moonwalker-fight/moonwalker-fight.webp`,
     component: MoonwalkRunner,
   },
@@ -40,7 +41,10 @@ const games = [
 ];
 
 
+
+
 function Game() {
+
   const [selectedGame, setSelectedGame] = useState(null);
 
   const startGame = (game) => {
@@ -70,7 +74,7 @@ function Game() {
       {selectedGame && (
         <div className="game-modal">
           <div className="game-modal-content">
-            <span className="close-button btn" onClick={closeGame}>&times;</span>
+            <span className="btn close-button" onClick={closeGame}>&times;</span>
             <selectedGame.component onClose={closeGame} autoStart={true} />
           </div>
         </div>

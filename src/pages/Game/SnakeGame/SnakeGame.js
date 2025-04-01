@@ -1,13 +1,18 @@
 import { useEffect } from "react";
 import { useGame } from "../../context/PointsContext";
+import { useToast } from "../../context/ToastContext";
 
-export default function TriviaChallenge() {
+
+
+export default function SnakeGame() {
+  const { addToast } = useToast();
   const { addPoints } = useGame();
 
   useEffect(() => {
     const handleMessage = (event) => {
       if (event.data?.type === "SNAKE_SCORE") {
         addPoints(event.data.score);
+        if(event.data.score > 0)  addToast(`You scored ${event.data.score} points!`, "success");
       }
     };
 
@@ -15,7 +20,7 @@ export default function TriviaChallenge() {
     return () => {
       window.removeEventListener("message", handleMessage);
     };
-  }, [addPoints]);
+  }, [addPoints, addToast]);
 
   return (
     <iframe

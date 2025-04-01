@@ -59,3 +59,40 @@ body {
   min-height: 80vh;
   width: 100%;
 }
+
+.btn {
+  display: block;
+  margin: 5px auto;
+  padding: 8px 15px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: unset;
+}
+
+.btn:hover {
+  background-color: #444;
+}
+
+.pd14{
+  padding: 14px;
+}
+
+.close-button {
+  background-color: red;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 24px;
+  cursor: pointer;
+  margin: 0;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}

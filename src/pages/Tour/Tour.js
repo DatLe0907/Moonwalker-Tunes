@@ -73,7 +73,7 @@ const Tour = () => {
                     onClick={() => enterConcert(concert)}
                     disabled={count === 0}
                   >
-                    {count > 0 ? "Watch Concert 🎬" : "No Tickets ❌"}
+                    {count > 0 ? "Watch Concert" : "No Tickets ❌"}
                   </button>
                 </li>
               ))}

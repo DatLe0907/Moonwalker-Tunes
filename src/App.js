@@ -10,11 +10,13 @@ import Shop from "./pages/Shop/Shop.js";
 import Game from "./pages/Game/Game.js";
 import Tour from "./pages/Tour/Tour.js";
 import { GameProvider } from './pages/context/PointsContext.js';
+import { ToastProvider } from './pages/context/ToastContext.js';  
 
 
 function App() {
   return (
-    <GameProvider>
+    <ToastProvider>
+      <GameProvider>
       <BrowserRouter basename='/Moonwalker-Tunes'>
         <Navbar/>
         <Routes>
@@ -28,6 +30,8 @@ function App() {
         <Footer/>
       </BrowserRouter>
     </GameProvider>
+    </ToastProvider>
+    
   );
 }
 

@@ -44,18 +44,21 @@ function Music() {
   // Lọc bài hát theo album ban đầu
   useEffect(() => {
     let sortedSongs = [...songs];
-
-    if (selectedAlbum !== "All") {
-      sortedSongs = sortedSongs.filter(song =>
+  
+    if (selectedAlbum === "Favorite Songs") {
+      const likedTitles = JSON.parse(localStorage.getItem("likedSongs")) || [];
+      sortedSongs = songs.filter((song) => likedTitles.includes(song.title));
+    } else if (selectedAlbum !== "All") {
+      sortedSongs = songs.filter((song) =>
         song.album
           .split("|")
-          .map(a => a.trim())
+          .map((a) => a.trim())
           .includes(selectedAlbum)
       );
     }
-    
+  
     setFilteredSongs(sortedSongs); // Cập nhật danh sách bài hát
-  }, [selectedAlbum]);
+  }, [selectedAlbum, songs]);
 
   // Lấy danh sách bài hát theo trang
   const currentSongs = useMemo(() => {

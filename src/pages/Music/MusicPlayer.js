@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import "./MusicPlayer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRepeat } from "@fortawesome/free-solid-svg-icons";
+import { faRepeat, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighlighted }) {
   const playerRef = useRef(null);
@@ -10,6 +10,27 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighligh
   const [currentTime, setCurrentTime] = useState(0);
   const [videoDuration, setVideoDuration] = useState(240);
   const [isReplay, setIsReplay] = useState(false);
+  const [likedSongs, setLikedSongs] = useState(() => {
+    return JSON.parse(localStorage.getItem("likedSongs")) || []; // Lấy danh sách từ localStorage
+  });
+
+  const isLiked = likedSongs.includes(song.title);
+
+  const toggleLike = () => {
+    let updatedLikedSongs = JSON.parse(localStorage.getItem("likedSongs")) || [];
+  
+    if (isLiked) {
+      // Nếu bài hát đã thích, xóa khỏi danh sách
+      updatedLikedSongs = updatedLikedSongs.filter((title) => title !== song.title);
+    } else {
+      // Nếu bài hát chưa thích, thêm vào danh sách
+      updatedLikedSongs.push(song.title);
+    }
+  
+    setLikedSongs(updatedLikedSongs); // Cập nhật state
+    localStorage.setItem("likedSongs", JSON.stringify(updatedLikedSongs)); // Lưu vào localStorage
+  };
+  
 
   const getYouTubeId = (url) => url.match(/embed\/([a-zA-Z0-9_-]+)/)?.[1] || null;
 
@@ -29,11 +50,11 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighligh
   const loadVideo = useCallback(() => {
     const videoId = getYouTubeId(song.src);
     if (!videoId || !playerRef.current) return;
-  
+
     if (player) {
       player.destroy();
     }
-  
+
     const newPlayer = new window.YT.Player(playerRef.current, {
       videoId,
       playerVars: {
@@ -60,9 +81,9 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighligh
         },
       },
     });
-  
+
     setPlayer(newPlayer);
-  }, [song.src, playerRef, player, isReplay, onEnd]); 
+  }, [song.src, playerRef, player, isReplay, onEnd]);
 
   useEffect(() => {
     if (!player) return;
@@ -149,8 +170,14 @@ export default function MusicPlayer({ song, isPlaying, onPlay, onEnd, isHighligh
             __html: `Album: ${song.album.replace(/\|/g, ' <strong style = "color: #fff">|</strong> ')}`,
           }}
         ></p>
-
       </div>
+
+      <button
+        className={`like-button ${isLiked ? "active" : ""}`}
+        onClick={toggleLike}
+      >
+        <FontAwesomeIcon icon={faHeart} />
+      </button>
     </div>
   );
 }

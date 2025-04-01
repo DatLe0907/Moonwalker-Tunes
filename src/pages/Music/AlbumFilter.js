@@ -1,7 +1,17 @@
 import "./AlbumFilter.css";
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useState, useEffect } from "react";
 
 const AlbumFilter = ({ selectedAlbum, setSelectedAlbum, setCurrentPage, songs, onFilter }) => {
+  const [favoriteSongs, setFavoriteSongs] = useState([]);
+
+  // Lấy danh sách bài hát đã thích từ localStorage
+  useEffect(() => {
+    const likedTitles = JSON.parse(localStorage.getItem("likedSongs")) || [];
+    // Lọc danh sách bài hát đầy đủ dựa trên title đã thích
+    const likedSongs = songs.filter(song => likedTitles.includes(song.title));
+    setFavoriteSongs(likedSongs);
+  }, [songs]);
+
   const albums = useMemo(() => {
     const albumCount = new Map();
 
@@ -12,20 +22,23 @@ const AlbumFilter = ({ selectedAlbum, setSelectedAlbum, setCurrentPage, songs, o
       });
     });
 
-    return ["All", ...Array.from(albumCount.entries()).sort((a, b) => b[1] - a[1]).map(([album]) => album)];
+    return ["All", "Favorite Songs", ...Array.from(albumCount.keys()).sort()];
   }, [songs]);
 
   const handleAlbumChange = useCallback((e) => {
     const album = e.target.value;
     setSelectedAlbum(album);
-    setCurrentPage(1); // 🔥 Reset trang về 1 khi đổi album
+    setCurrentPage(1);
 
-    const filtered = album === "All"
-      ? songs
-      : songs.filter(song => song.album.split(",").some(a => a.trim() === album));
+    const filtered =
+      album === "All"
+        ? songs
+        : album === "Favorite Songs"
+        ? favoriteSongs // 🔥 Lấy danh sách bài hát đã thích
+        : songs.filter((song) => song.album.split("|").some((a) => a.trim() === album));
 
     onFilter(filtered);
-  }, [songs, setSelectedAlbum, setCurrentPage, onFilter]);
+  }, [songs, setSelectedAlbum, setCurrentPage, onFilter, favoriteSongs]);
 
   return (
     <select className="Music-filter" value={selectedAlbum} onChange={handleAlbumChange}>
