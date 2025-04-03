@@ -109,16 +109,16 @@ const TourSection = () => {
   
     sendEmail(formData.email, formData.name, ticketDetails, addToast);
   
-    setConfirmation(`Thank you, ${formData.name}! You now have ${updatedBookings.find((b) => b.tour === selectedTour.name)?.tickets} ticket(s) for ${selectedTour.name}.`);
+    setConfirmation(`Thank you, ${formData.name}! You have ${updatedBookings.find((b) => b.tour === selectedTour.name)?.tickets} ticket(s) for ${selectedTour.name}.`);
   };
 
   return (
-    <div id="ticket" className="tour tour-section row">
+    <div id="ticket" className="tour tour-section row pdb60">
       
       <div className="content-section">
-        <h2 className="section-heading white-text title">TOUR DATES</h2>
-        <p className="section-sub-heading white-text">
-          Remember to book your tickets! (Your Points: {points})
+        <h2 className="section-heading white-text title">TOUR</h2>
+        <p className="description section-sub-heading white-text">
+          Remember to book your tickets!
         </p>
 
         <ul className="places-list">

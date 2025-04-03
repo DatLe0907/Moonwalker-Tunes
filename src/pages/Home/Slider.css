@@ -1,7 +1,6 @@
 /* Slider */
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@600&family=Great+Vibes&family=Caveat:wght@600&family=Merriweather:wght@400;700&display=swap");
 .slider {
-  padding-top: 60px;
   width: 100%;
   overflow: hidden;
   position: relative;

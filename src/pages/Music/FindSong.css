@@ -71,4 +71,8 @@
     background: #f1f1f1;
   }
   
+
+  .suggestions li.selected {
+    background: #f1f1f1;
+  }
   

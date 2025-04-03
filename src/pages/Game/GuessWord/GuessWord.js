@@ -12,20 +12,19 @@ export default function GuessWord({ onClose, autoStart }) {
     { hint: "What is the best-selling album of all time by Michael Jackson?", word: "Thriller" },
     { hint: "What is Michael Jackson's signature dance move called?", word: "Moonwalk" },
     { hint: "Which Michael Jackson song features a famous guitar solo by Eddie Van Halen?", word: "Beat It" },
-    { hint: "What is the name of Michael Jackson's famous ranch?", word: "Neverland Ranch" },
+    { hint: "What is the name of Michael Jackson's famous ranch?", word: "Neverland" },
     { hint: "What iconic fashion accessory is Michael Jackson known for wearing on stage?", word: "Glove" },
     { hint: "Which 1987 album includes hits like 'Smooth Criminal' and 'Man in the Mirror'?", word: "Bad" },
     { hint: "Which 1991 album features the song 'Black or White'?", word: "Dangerous" },
     { hint: "Which hit song tells the story of a girl claiming Michael Jackson is the father of her child?", word: "Billie Jean" },
     { hint: "What is the name of the album Michael Jackson released before 'Thriller'?", word: "Off The Wall" },
-    { hint: "What is Michael Jackson's famous nickname?", word: "King Pop" },
+    { hint: "What is Michael Jackson's famous nickname?", word: "King of Pop" },
     { hint: "Which Michael Jackson song promotes global peace and unity?", word: "Heal The World" },
     { hint: "Which song by Michael Jackson addresses racial harmony?", word: "Black White" },
     { hint: "What is the name of the charity song co-written by Michael Jackson and Lionel Richie?", word: "We Are The World" },
     { hint: "What is the name of Michael Jackson's 1995 double album featuring past hits and new songs?", word: "HIStory" },
     { hint: "Which song features Michael Jackson's iconic anti-gravity lean?", word: "Smooth Criminal" },
     { hint: "What is the name of the Cirque du Soleil show inspired by Michael Jackson's music?", word: "MJ The One" },
-    { hint: "Which famous dance routine is featured in the 'Thriller' music video?", word: "Thriller Dance" },
     { hint: "What was the name of Michael Jackson's family group?", word: "Jackson Five" },
     { hint: "Which Jackson 5 song teaches the basics of learning?", word: "ABC Song" },
     { hint: "What is the name of Michael Jackson's early solo hit about a pet rat?", word: "Ben" },
@@ -33,7 +32,7 @@ export default function GuessWord({ onClose, autoStart }) {
     { hint: "Which Michael Jackson song features basketball legend Michael Jordan in the music video?", word: "Jam" },
     { hint: "Which Michael Jackson song addresses environmental issues?", word: "Earth Song" },
     { hint: "Which Michael Jackson tour was cut short due to health issues?", word: "Dangerous Tour" },
-    { hint: "Which Michael Jackson song discusses painkiller addiction?", word: "Morphine Song" },
+    { hint: "Which Michael Jackson song discusses painkiller addiction?", word: "Morphine" },
     { hint: "What is Michael Jackson's first name?", word: "Michael" },
     { hint: "What is Michael Jackson's last name?", word: "Jackson" },
     { hint: "Which record label was Michael Jackson associated with during his career?", word: "Sony Music" },
@@ -45,12 +44,11 @@ export default function GuessWord({ onClose, autoStart }) {
     { hint: "What is the nickname of Michael Jackson's youngest son?", word: "Blanket" },
     { hint: "Which Michael Jackson song is about self-reflection and social change?", word: "Man In The Mirror" },
     { hint: "Which song written by R. Kelly was performed by Michael Jackson?", word: "You Are Not Alone" },
-    { hint: "What is the name of Michael Jackson's iconic style?", word: "Single Glove" },
     { hint: "Who directed Michael Jackson's 'They Don’t Care About Us' music video?", word: "Spike Lee" },
-    { hint: "Where does Michael Jackson have a star on the Walk of Fame?", word: "Hollywood Walk" },
+    { hint: "Where does Michael Jackson have a star on the Walk of Fame?", word: "Hollywood" },
     { hint: "Which record label did Michael Jackson start his career with?", word: "Motown" },
     { hint: "Who played the guitar solo in Michael Jackson's 'Beat It'?", word: "Van Halen" },
-    { hint: "Which brand was involved in Michael Jackson's famous commercial accident?", word: "Pepsi Accident" },
+    { hint: "Which brand was involved in Michael Jackson's famous commercial accident?", word: "Pepsi" },
     { hint: "What major music award did Michael Jackson win multiple times?", word: "Grammy Award" },
     { hint: "What is the name of the Broadway show based on Michael Jackson's life?", word: "MJ Musical" },
     { hint: "What is the title of the TV miniseries about the Jackson family?", word: "American Dream" },
@@ -58,7 +56,7 @@ export default function GuessWord({ onClose, autoStart }) {
     { hint: "Which duet song did Michael Jackson perform with his sister Janet?", word: "Scream" },
     { hint: "What is the name of Michael Jackson's famous pet chimpanzee?", word: "Bubbles Chimp" },
     { hint: "What is the name of the 1984 tour Michael Jackson performed with his brothers?", word: "Victory" },
-    { hint: "What is the name of the 1988 movie featuring Michael Jackson's music videos and short films?", word: "Moonwalker Film" },
+    { hint: "What is the name of the 1988 movie featuring Michael Jackson's music videos and short films?", word: "Moonwalker" },
     { hint: "What is the name of Michael Jackson's short film released in 1996?", word: "Ghosts Film" },
     { hint: "Who was one of Michael Jackson's choreographers?", word: "Wade Robson" },
     { hint: "What is the name of Michael Jackson's live TV special celebrating Motown?", word: "Motown Special" },
@@ -88,6 +86,7 @@ export default function GuessWord({ onClose, autoStart }) {
   const winRef = useRef(false);  // Track if the win has already been handled
   const gameOverRef = useRef(false);  // Track if game over has been handled
 
+  
   const startGame = useCallback(() => {
     const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
     setCurrentWord(randomWord.word);
@@ -139,7 +138,7 @@ export default function GuessWord({ onClose, autoStart }) {
             addPoints(10);
             addToast("You guessed the word! +10 tokens", "success");
             setGameStarted(false);
-            confetti({ particleCount: 150, spread: 70, origin: { y: 1, z: 9999999 } });
+            confetti({ particleCount: 150, spread: 70, origin: { y: 1},  zIndex: 10000});
           }
         } else {
           setWrongGuesses((prev) => {
@@ -199,7 +198,7 @@ export default function GuessWord({ onClose, autoStart }) {
             ) : (
               <>
                 <button className="btn mj-button" onClick={startGame}>
-                  {showGameOver ? "Try Again" : "Next hint"}
+                  {showGameOver ? "Try Again" : "Next question"}
                 </button>
               </>
             )}

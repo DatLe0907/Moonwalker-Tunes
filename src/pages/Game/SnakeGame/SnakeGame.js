@@ -12,7 +12,9 @@ export default function SnakeGame() {
     const handleMessage = (event) => {
       if (event.data?.type === "SNAKE_SCORE") {
         addPoints(event.data.score);
-        if(event.data.score > 0)  addToast(`You scored ${event.data.score} points!`, "success");
+        if (event.data.score > 0) {
+          addToast(`You gain ${event.data.score} token${event.data.score !== 1 ? "s" : ""}!`, "success");
+        }
       }
     };
 

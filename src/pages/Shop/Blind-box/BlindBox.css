@@ -1,6 +1,5 @@
-.Shop {
+.Blind-box {
   min-height: 100vh;
-  margin-top: 60px;
   text-align: center;
   font-size: 16px;
   display: flex;
@@ -16,7 +15,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 
@@ -28,6 +26,16 @@
   background-position: center;
 }
 
+.bg::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to top, rgb(0, 0, 0), transparent);
+}
+
 .content{
   display: flex;
   flex-direction: column;
@@ -37,11 +45,14 @@
 }
 
 
-.Shop-title {
-  padding: 40px 20px;
+.Blind-box-title {
+  margin-bottom: 20px;
+  text-align: center;
+  z-index: 1;
+  text-shadow: 0 0 10px #295A96;
 }
 
-.Shop-content {
+.Blind-box-content {
   font-size: 1.2rem;
   line-height: 1.5;
   max-width: 90%;
@@ -49,6 +60,7 @@
   overflow-wrap: break-word;
   max-width: 600px;
   z-index: 1;
+  text-shadow: 0 0 10px #295A96;
 }
 
 .blind-box-container {
@@ -59,8 +71,6 @@
   padding: 40px 20px;
 }
 
-.blind-box-wrapper {
-}
 
 .blind-box {
   width: 220px;

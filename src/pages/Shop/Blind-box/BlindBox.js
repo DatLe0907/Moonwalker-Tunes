@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useGame } from "../../context/PointsContext";
+import { useToast } from "../../context/ToastContext";
 import "./BlindBox.css";
+
 
 const rarityLevels = [
     { name: "Common", color: "#fff", chance: 60 }, 
@@ -93,6 +95,7 @@ const getRandomItem = (type) => {
 
 const BlindBox = () => {
   const { points, addPoints } = useGame();
+  const { addToast } = useToast();
   const [boxState, setBoxState] = useState({
     sticker: { flipped: false, reward: null },
     wallpaper: { flipped: false, reward: null },
@@ -102,7 +105,7 @@ const BlindBox = () => {
 
   const openBox = (type) => {
     if (points < cost) {
-      alert("Not enough tokens!");
+      addToast("Not enough tokens!", "error");
       return;
     }
 
@@ -129,7 +132,7 @@ const BlindBox = () => {
   };
 
   return (
-    <div className="Shop" >
+    <div className="Blind-box" >
       <div className="parallax">
 
         <div className="bg" style = {{
@@ -139,7 +142,8 @@ const BlindBox = () => {
       backgroundRepeat: "no-repeat",}}></div>
 
         <div className="content">
-          <div className="Shop-content">Spend {cost} tokens per attempt to receive a Michael Jackson-themed sticker or wallpaper.</div>
+          <div className="title Blind-box-title">BLIND BOX</div>
+          <div className="Blind-box-content">Spend {cost} tokens to receive a Michael Jackson-themed sticker or wallpaper.</div>
           <div className="blind-box-container">
             {["sticker", "wallpaper"].map((type) => (
               <div key={type} className="blind-box-wrapper">

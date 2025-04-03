@@ -56,7 +56,11 @@ function Game() {
   };
 
   return (
-    <div className="game-container">
+    <div className="row game-container">
+      <div className="game-header">
+        <h1 className="title game-header-title">Games</h1>
+        <p className="description">Play and earn tokens!</p>
+      </div>
       <div className="game-list">
         {games.map((game) => (
           <div key={game.id} className="game-card" onClick={() => startGame(game)}>

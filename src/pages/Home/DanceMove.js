@@ -20,7 +20,7 @@ export default function DanceMove() {
   ];
 
   return (
-    <div className="dance-move">
+    <div className="dance-move pdb60">
         <div className="dance-box ">
           <h2 className = "dance-title title">Iconic dance</h2>
         </div>
